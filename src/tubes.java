@@ -1,6 +1,7 @@
 package tubes;
 
 import java.util.*;
+import java.lang.*; 
 
 public class main {
   public static void main(String[] args) {
@@ -101,6 +102,7 @@ public class main {
     		else if (pil1==6)
     		{
     			check1=true;
+			System.exit(0); 
     		}
     		else 
     		{
