@@ -1,12 +1,59 @@
 package tubes;
 
 import java.util.*;
-import java.lang.*; 
+import java.lang.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class main {
+  static void inputSPL()
+  {
+	  //membaca masukan dari keyboard
+	  Scanner userInput = new Scanner(System.in);
+	  int m = userInput.nextInt();
+	  int n = userInput.nextInt();
+	  //melakukan inisiasi array
+	  int [][] A= new int[m-1][n-1];
+	  int [] B= new int[m-1];
+	  
+	  //menerima masukan koefisien aij
+	  for(int i = 0; i<m; i++)
+	  {
+		  for(int j = 0; j<n; j++)
+		  {
+			  A[i][j]  = userInput.nextInt();
+		  }
+	  }
+	  
+	  //menerima masukan koefisien bi
+	  for(int k = 0; k<m; k++)
+	  {
+		  B[k]  = userInput.nextInt();
+	  }
+  }
+  
+  static void bacaSPL()
+  {
+	 //membaca masukan dari file text berbentuk matriks augmented 
+	 Scanner userInput = new Scanner(System.in);
+	 String namafile = userInput.nextLine();
+	 try {
+		 // membaca file
+         File myFile = new File(namafile);
+         Scanner fileReader = new Scanner(myFile);
+         } 
+	 catch (FileNotFoundException e) 
+	 {
+		// apabila file tidak ditemukan
+         System.out.println("Terjadi Kesalahan: " + e.getMessage());
+         e.printStackTrace();
+     }
+  }
+ 
   public static void main(String[] args) {
 	Scanner userInput = new Scanner(System.in);
 	
+	//menampilkan menu utama
     System.out.println("MENU");
     System.out.println("1. Sistem Persamaaan Linier");
     System.out.println("2. Determinan");
@@ -19,6 +66,7 @@ public class main {
     boolean check2a = false;
     boolean check2b = false;
     
+    //validasi masukan sampai sesuai dengan pilihan yang ada
     while (!check1)
     	{
     		System.out.print("Masukkan pilihan : ");
@@ -102,7 +150,7 @@ public class main {
     		else if (pil1==6)
     		{
     			check1=true;
-			System.exit(0); 
+    			System.exit(0);
     		}
     		else 
     		{
