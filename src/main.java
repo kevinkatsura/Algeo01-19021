@@ -5,7 +5,7 @@ import java.lang.*;
 import java.io.*;
 
 public class main {
-  static int [][] inputSPL()
+  static float [][] inputSPL()
   {
 	  //membaca masukan dari keyboard
 	  Scanner userInput = new Scanner(System.in);
@@ -14,8 +14,8 @@ public class main {
 	  System.out.print("Masukkan banyak peubah (n) :");
 	  int n = userInput.nextInt();
 	  //melakukan inisiasi array
-	  int [][] A= new int[m][n];
-	  int [] B= new int[m];
+	  float [][] A= new float[m][n];
+	  float [] B= new float[m];
 	  
 	  System.out.println("Masukkan koefisien A[i][j] : ");
 	  //menerima masukan koefisien a[i][j]
@@ -36,7 +36,7 @@ public class main {
 		  B[k]  = userInput.nextInt();
 	  }
 	  
-	  int [][] Matriks = new int [m][n+1];
+	  float [][] Matriks = new float [m][n+1];
 
 	  //membentuk matriks augmented dari masukan yang ada
 	  for(int i = 0; i<m; i++)
@@ -54,13 +54,13 @@ public class main {
 	  return Matriks;
   }
 
-  static void tukarBaris(int Matriks [][], int i, int j) 
+  static void tukarBaris(float Matriks [][], int i, int j) 
   {  
 	  //tukar elemen baris i dengan baris j
       	  int N = Matriks.length;
 	  for (int k=0; k<=N; k++) 
       		{ 
-          		int Temp = Matriks[i][k]; 
+          		float Temp = Matriks[i][k]; 
           		Matriks[i][k] = Matriks[j][k]; 
           		Matriks[j][k] = Temp; 
       		} 
@@ -68,6 +68,10 @@ public class main {
 
   private static void bacaSPL()
   {
+	 //kamus
+	 int baris=0, kolom=0;
+	 float[][]Matriks;
+	  
 	 //membaca masukan dari file text berbentuk matriks augmented 
 	 Scanner userInput = new Scanner(System.in);
 	 String namafile = userInput.nextLine();
@@ -77,12 +81,24 @@ public class main {
          File myFile = new File(namafile);
          Scanner fileReader = new Scanner(myFile);
          
-         // cetak isi file
-         while(fileReader.hasNextLine()){
-             String data = fileReader.nextLine();
-             System.out.println(data);
+         // menentukan banyak baris/kolom
+         while(fileReader.hasNextLine())
+         {
+        	baris++;
+        	Scanner Kolom = new Scanner(fileReader.nextLine());
+        	{
+        		while(Kolom.hasNextFloat())
+        		{
+        			kolom++;
+        		}
+        	}
+        	
          }
+         Matriks = new float [baris][kolom];
+         fileReader.close();
+         Matriks = bacaMatriks(namafile,baris,kolom);
 	 } 
+	  
 	 catch (FileNotFoundException e) 
 	 {
 		// apabila file tidak ditemukan
@@ -90,6 +106,24 @@ public class main {
          e.printStackTrace();
      }
   }
+  
+  static float[][] bacaMatriks (String myFile, int brs, int klm) throws FileNotFoundException
+	 {
+		float [][]Matriks = new float[brs][klm];
+		
+		Scanner fileReader = new Scanner(myFile);
+		for (int a=0; a<brs;a++)
+		{
+			for (int b=0; b<klm;b++)
+			{
+				if(fileReader.hasNextFloat())
+				{
+					Matriks[a][b]=fileReader.nextFloat();
+				}
+			}
+		}
+	    return Matriks; 
+	 }
   
   static float DeterminanKofaktor(float[][] matriks ) {
 		float det = 0;
@@ -122,7 +156,7 @@ public class main {
 
 		}
 	}
-
+  
   static float DeterminanReduksiBaris(float[][] matriks) {
   		float representation1,representation2 ;
 
