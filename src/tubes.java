@@ -2,8 +2,7 @@ package tubes;
 
 import java.util.*;
 import java.lang.*;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 public class main {
   static void inputSPL()
@@ -16,7 +15,7 @@ public class main {
 	  int [][] A= new int[m-1][n-1];
 	  int [] B= new int[m-1];
 	  
-	  //menerima masukan koefisien aij
+	  //menerima masukan koefisien a[i][j]
 	  for(int i = 0; i<m; i++)
 	  {
 		  for(int j = 0; j<n; j++)
@@ -25,7 +24,7 @@ public class main {
 		  }
 	  }
 	  
-	  //menerima masukan koefisien bi
+	  //menerima masukan koefisien b[i]
 	  for(int k = 0; k<m; k++)
 	  {
 		  B[k]  = userInput.nextInt();
@@ -37,11 +36,18 @@ public class main {
 	 //membaca masukan dari file text berbentuk matriks augmented 
 	 Scanner userInput = new Scanner(System.in);
 	 String namafile = userInput.nextLine();
-	 try {
+	 try 
+	 {
 		 // membaca file
          File myFile = new File(namafile);
          Scanner fileReader = new Scanner(myFile);
-         } 
+         
+         // cetak isi file
+         while(fileReader.hasNextLine()){
+             String data = fileReader.nextLine();
+             System.out.println(data);
+         }
+	 } 
 	 catch (FileNotFoundException e) 
 	 {
 		// apabila file tidak ditemukan
@@ -49,6 +55,8 @@ public class main {
          e.printStackTrace();
      }
   }
+  
+  
  
   public static void main(String[] args) {
 	Scanner userInput = new Scanner(System.in);
@@ -63,15 +71,16 @@ public class main {
     System.out.println("6. Keluar");
     
     boolean check1 = false;
-    boolean check2a = false;
-    boolean check2b = false;
+    boolean check2 = false;
+    boolean check3 = false;
+    int pil_Masukan, pil_Operasi;
     
     //validasi masukan sampai sesuai dengan pilihan yang ada
     while (!check1)
     	{
     		System.out.print("Masukkan pilihan : ");
-    		int pil1 = userInput.nextInt();
-    		if (pil1==1)
+    		pil_Operasi = userInput.nextInt();
+    		if (pil_Operasi==1)
     		{
     			check1=true;
     			System.out.println("1. Metode eliminasi Gauss");
@@ -79,75 +88,255 @@ public class main {
     			System.out.println("3. Metode matriks balikan");
     			System.out.println("4. Kaidah Cramer");
     			
-    			while (!check2a)
+    			while (!check2)
     			{
     				System.out.print("Masukkan pilihan : ");
-    				int pil2a = userInput.nextInt();
+    				int pil_Metode1 = userInput.nextInt();
         
-    				if (pil2a==1)
+    				if (pil_Metode1==1)
     				{
-    					check2a=true;
+    					check2=true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    	    				pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
-    				else if (pil2a==2)
+    				else if (pil_Metode1==2)
     				{
-    					check2a=true;
+    					check2=true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    						pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
-    				else if (pil2a==3)
+    				else if (pil_Metode1==3)
     				{
-    					check2a=true;
+    					check2=true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    						pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
-    				else if (pil2a==4)
+    				else if (pil_Metode1==4)
     				{
-    					check2a=true;
+    					check2=true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    						pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
     				else 
     				{
     					System.out.println("Pilihan tidak tersedia");
-    					check2a=false;
+    					check2=false;
     				}
     			}
     		}
     	
-    		else if (pil1==2)
+    		else if (pil_Operasi==2)
     		{
     			
     			check1=true;
     			System.out.println("1. Metode reduksi baris");
     			System.out.println("2. Metode ekspansi kofaktor");
     	
-    			while(!check2b)
+    			while(!check2)
     			{
     				System.out.print("Masukkan pilihan : ");
-    				int pil2b = userInput.nextInt();
+    				int pil_Metode2 = userInput.nextInt();
         
-    				if (pil2b == 1)
+    				if (pil_Metode2 == 1)
     				{
-    					check2b = true;
+    					check2 = true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    	    				pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
-    				else if (pil2b==2)
+    				else if (pil_Metode2==2)
     				{
-    					check2b = true;
+    					check2 = true;
+    					System.out.println("1. Menerima masukan keyboard");
+    	    			System.out.println("2. Menerima masukan dari file");
+    					while(!check3)
+    					{
+    						System.out.print("Masukkan pilihan : ");
+    						pil_Masukan = userInput.nextInt();
+    	    				if(pil_Masukan==1)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else if (pil_Masukan==2)
+    	    				{
+    	    					check3=true;
+    	    				}
+    	    				else 
+    	    				{
+    	    					System.out.println("Pilihan tidak tersedia");
+    	    	    			check3 = false;
+    	    				}
+    					}
     				}
     				else 
     				{
     					System.out.println("Pilihan tidak tersedia");
-    					check2b = false;
+    					check2 = false;
     				}
     			}
     		}
-    		else if (pil1==3)
+    		else if (pil_Operasi==3)
     		{
     			check1=true;
+    			System.out.println("1. Menerima masukan keyboard");
+    			System.out.println("2. Menerima masukan dari file");
+				while(!check3)
+				{
+					System.out.print("Masukkan pilihan : ");
+					pil_Masukan = userInput.nextInt();
+    				if(pil_Masukan==1)
+    				{
+    					check3=true;
+    				}
+    				else if (pil_Masukan==2)
+    				{
+    					check3=true;
+    				}
+    				else 
+    				{
+    					System.out.println("Pilihan tidak tersedia");
+    	    			check3 = false;
+    				}
+				}
     		}
-    		else if (pil1==4)
+    		else if (pil_Operasi==4)
     		{
     			check1=true;
+    			System.out.println("1. Menerima masukan keyboard");
+    			System.out.println("2. Menerima masukan dari file");
+				while(!check3)
+				{
+					System.out.print("Masukkan pilihan : ");
+					pil_Masukan = userInput.nextInt();
+    				if(pil_Masukan==1)
+    				{
+    					check3=true;
+    				}
+    				else if (pil_Masukan==2)
+    				{
+    					check3=true;
+    				}
+    				else 
+    				{
+    					System.out.println("Pilihan tidak tersedia");
+    	    			check3 = false;
+    				}
+				}
     		}
-    		else if (pil1==5)
+    		else if (pil_Operasi==5)
     		{
     			check1=true;
+    			System.out.println("1. Menerima masukan keyboard");
+    			System.out.println("2. Menerima masukan dari file");
+				while(!check3)
+				{
+					System.out.print("Masukkan pilihan : ");
+					pil_Masukan = userInput.nextInt();
+    				if(pil_Masukan==1)
+    				{
+    					check3=true;
+    				}
+    				else if (pil_Masukan==2)
+    				{
+    					check3=true;
+    				}
+    				else 
+    				{
+    					System.out.println("Pilihan tidak tersedia");
+    	    			check3 = false;
+    				}
+				}
     		}
-    		else if (pil1==6)
+    		else if (pil_Operasi==6)
     		{
     			check1=true;
     			System.exit(0);
