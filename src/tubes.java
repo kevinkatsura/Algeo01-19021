@@ -5,32 +5,55 @@ import java.lang.*;
 import java.io.*;
 
 public class tubes {
-  private static void inputSPL()
+  static int [][] inputSPL()
   {
 	  //membaca masukan dari keyboard
 	  Scanner userInput = new Scanner(System.in);
+	  System.out.print("Masukkan banyak persamaan (m) : ");
 	  int m = userInput.nextInt();
+	  System.out.print("Masukkan banyak peubah (n) :");
 	  int n = userInput.nextInt();
 	  //melakukan inisiasi array
 	  int [][] A= new int[m][n];
 	  int [] B= new int[m];
 	  
+	  System.out.println("Masukkan koefisien A[i][j] : ");
 	  //menerima masukan koefisien a[i][j]
 	  for(int i = 0; i<m; i++)
 	  {
 		  for(int j = 0; j<n; j++)
 		  {
+			  System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
 			  A[i][j]  = userInput.nextInt();
 		  }
 	  }
 	  
 	  //menerima masukan koefisien b[i]
+	  System.out.println("Masukkan B[i] : ");
 	  for(int k = 0; k<m; k++)
 	  {
+		  System.out.print("B["+ (k+1) +"] = ");
 		  B[k]  = userInput.nextInt();
 	  }
+	  
+	  int [][] Matriks = new int [m][n+1];
+
+	  //membentuk matriks augmented dari masukan yang ada
+	  for(int i = 0; i<m; i++)
+	  {
+		  for(int j = 0; j<n; j++)
+		  {
+			  Matriks[i][j]  = A[i][j];
+		  }
+	  }
+	  
+	  for (int k=0;k<m;k++)
+	  {
+		  Matriks[k][n]  = B[k];
+	  }
+	  return Matriks;
   }
-  
+
   private static void bacaSPL()
   {
 	 //membaca masukan dari file text berbentuk matriks augmented 
@@ -359,7 +382,7 @@ public class tubes {
 		}
 		else{
 			int i,j,k;
-			int[][] Mtemp = new int[matriks.length-1][matriks[0].length-1];
+			float[][] Mtemp = new int[matriks.length-1][matriks[0].length-1];
 			for (k = 0; k < matriks[0].length; k++){
 				for (i=1; i < matriks.length; i++){
 					for(j=0; j < matriks[0].length; j++){
@@ -371,7 +394,7 @@ public class tubes {
 						}
 					}
 				}
-				if (k%2 ==0){
+				if (k%2 == 0){
 					det += matriks[0][k]*DeterminanKofaktor(Mtemp);
 				}
 				else{
@@ -384,12 +407,13 @@ public class tubes {
 	}
 
 	public static float DeterminanReduksiBaris(float[][] matriks) {
-  		int representation1,representation2 ;
+  		float representation1,representation2 ;
+  		int i ,j ,k ;
 		for (int i = 1; i < matriks.length; i++) {
 			for (int j = 0; j < i ; j++) {
 				representation1 = matriks[i-1][j] ;
 				representation2 = matriks[i][j] ;
-				for (int k = 0; k < matriks[0].length ; k++) {
+				for (int k = j; k < matriks[0].length ; k++) {
 					matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
 				}
 
@@ -402,18 +426,35 @@ public class tubes {
 		return det ;
 	}
 
-	public static float SPLGauss(float[][] matriks) {
-		int representation1,representation2 ;
+	public static (float[][]) SPLGauss(float[][] matriks) {
+		float representation1,representation2 ;
+		int i ,j ,k,l,m ;
 		for (int i = 1; i < matriks.length; i++) {
 			for (int j = 0; j < i ; j++) {
 				representation1 = matriks[i-1][j] ;
 				representation2 = matriks[i][j] ;
-				for (int k = 0; k < matriks[0].length ; k++) {
+				for (int k = j; k < matriks[0].length ; k++) {
 					matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
-					
 				}
+
+			}
+		}
+		for (int l = 0; l < matriks.length; l++) {
+			int indeksFound = 0;
+			int i = 0 ;
+			while(i < matriks[l].length && indeksFound != 0){
+				if (matriks[l][i] != 0){
+					indeksFound = i ;
+				}
+				i++ ;
+			}
+			float temp = matriks[l][indeksFound] ;
+			for (int m = i; m < matriks[l].length; m++) {
+
+				matriks[l][m] = matriks[l][m]/temp ;
 			}
 
 		}
+		return matriks ;
 	}
 }
