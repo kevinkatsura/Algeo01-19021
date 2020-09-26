@@ -5,32 +5,55 @@ import java.lang.*;
 import java.io.*;
 
 public class tubes {
-  private static void inputSPL()
+  static int [][] inputSPL()
   {
 	  //membaca masukan dari keyboard
 	  Scanner userInput = new Scanner(System.in);
+	  System.out.print("Masukkan banyak persamaan (m) : ");
 	  int m = userInput.nextInt();
+	  System.out.print("Masukkan banyak peubah (n) :");
 	  int n = userInput.nextInt();
 	  //melakukan inisiasi array
 	  int [][] A= new int[m][n];
 	  int [] B= new int[m];
 	  
+	  System.out.println("Masukkan koefisien A[i][j] : ");
 	  //menerima masukan koefisien a[i][j]
 	  for(int i = 0; i<m; i++)
 	  {
 		  for(int j = 0; j<n; j++)
 		  {
+			  System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
 			  A[i][j]  = userInput.nextInt();
 		  }
 	  }
 	  
 	  //menerima masukan koefisien b[i]
+	  System.out.println("Masukkan B[i] : ");
 	  for(int k = 0; k<m; k++)
 	  {
+		  System.out.print("B["+ (k+1) +"] = ");
 		  B[k]  = userInput.nextInt();
 	  }
+	  
+	  int [][] Matriks = new int [m][n+1];
+
+	  //membentuk matriks augmented dari masukan yang ada
+	  for(int i = 0; i<m; i++)
+	  {
+		  for(int j = 0; j<n; j++)
+		  {
+			  Matriks[i][j]  = A[i][j];
+		  }
+	  }
+	  
+	  for (int k=0;k<m;k++)
+	  {
+		  Matriks[k][n]  = B[k];
+	  }
+	  return Matriks;
   }
-  
+
   private static void bacaSPL()
   {
 	 //membaca masukan dari file text berbentuk matriks augmented 
