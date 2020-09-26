@@ -51,6 +51,7 @@ public class main {
 	  {
 		  Matriks[k][n]  = B[k];
 	  }
+	  userInput.close();
 	  return Matriks;
   }
 
@@ -105,6 +106,7 @@ public class main {
          System.out.println("Terjadi Kesalahan: " + e.getMessage());
          e.printStackTrace();
      }
+	 userInput.close();
   }
   
   static float[][] bacaMatriks (String myFile, int brs, int klm) throws FileNotFoundException
@@ -122,6 +124,7 @@ public class main {
 				}
 			}
 		}
+		fileReader.close();
 	    return Matriks; 
 	 }
   
@@ -500,5 +503,7 @@ public class main {
 	    		}
 	  
 	    	}
-	    }
+	    userInput.close();    
+  }
+ 
 }
