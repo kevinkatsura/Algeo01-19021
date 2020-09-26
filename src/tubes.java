@@ -5,17 +5,17 @@ import java.lang.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class main {
-  static void inputSPL()
+public class tubes {
+  private static void inputSPL()
   {
 	  //membaca masukan dari keyboard
 	  Scanner userInput = new Scanner(System.in);
 	  int m = userInput.nextInt();
 	  int n = userInput.nextInt();
 	  //melakukan inisiasi array
-	  int [][] A= new int[m-1][n-1];
+	  int [][] A= new int[m][n];
 	  int [] B= new int[m-1];
-	  
+
 	  //menerima masukan koefisien aij
 	  for(int i = 0; i<m; i++)
 	  {
@@ -32,7 +32,7 @@ public class main {
 	  }
   }
   
-  static void bacaSPL()
+  private static void bacaSPL()
   {
 	 //membaca masukan dari file text berbentuk matriks augmented 
 	 Scanner userInput = new Scanner(System.in);
