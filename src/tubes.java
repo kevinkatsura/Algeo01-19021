@@ -351,7 +351,7 @@ public class tubes {
     	}
     }
 
-	public static float DeterminanKofaktor(int[][] matriks ) {
+	public static float DeterminanKofaktor(float[][] matriks ) {
 		float det = 0;
 		if ((matriks.length == 2) && (matriks[0].length == 2)){
 			det =(matriks[0][0]*matriks[1][1]) - (matriks[0][1]*matriks[1][0]);
@@ -383,8 +383,8 @@ public class tubes {
 		}
 	}
 
-	public static int DeterminanReduksiBaris(int[][] matriks) {
-  		int representation ;
+	public static float DeterminanReduksiBaris(float[][] matriks) {
+  		int representation1,representation2 ;
 		for (int i = 1; i < matriks.length; i++) {
 			for (int j = 0; j < i ; j++) {
 				representation1 = matriks[i-1][j] ;
@@ -400,5 +400,20 @@ public class tubes {
 			det *= matriks[i][i] ;
 		}
 		return det ;
+	}
+
+	public static float SPLGauss(float[][] matriks) {
+		int representation1,representation2 ;
+		for (int i = 1; i < matriks.length; i++) {
+			for (int j = 0; j < i ; j++) {
+				representation1 = matriks[i-1][j] ;
+				representation2 = matriks[i][j] ;
+				for (int k = 0; k < matriks[0].length ; k++) {
+					matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
+					
+				}
+			}
+
+		}
 	}
 }
