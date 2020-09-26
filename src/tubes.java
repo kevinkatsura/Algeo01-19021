@@ -54,6 +54,18 @@ public class tubes {
 	  return Matriks;
   }
 
+  static void tukarBaris(int Matriks [][], int i, int j) 
+  {  
+	  //tukar elemen baris i dengan baris j
+      	  int N = Matriks.length;
+	  for (int k=0; k<=N; k++) 
+      		{ 
+          		int Temp = Matriks[i][k]; 
+          		Matriks[i][k] = Matriks[j][k]; 
+          		Matriks[j][k] = Temp; 
+      		} 
+  }
+
   private static void bacaSPL()
   {
 	 //membaca masukan dari file text berbentuk matriks augmented 
@@ -82,9 +94,9 @@ public class tubes {
   
  
   public static void main(String[] args) {
-	Scanner userInput = new Scanner(System.in);
+    Scanner userInput = new Scanner(System.in);
 	
-	//menampilkan menu utama
+    //menampilkan menu utama
     System.out.println("MENU");
     System.out.println("1. Sistem Persamaaan Linier");
     System.out.println("2. Determinan");
