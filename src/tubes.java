@@ -12,8 +12,8 @@ public class main {
 	  int m = userInput.nextInt();
 	  int n = userInput.nextInt();
 	  //melakukan inisiasi array
-	  int [][] A= new int[m-1][n-1];
-	  int [] B= new int[m-1];
+	  int [][] A= new int[m][n];
+	  int [] B= new int[m];
 	  
 	  //menerima masukan koefisien a[i][j]
 	  for(int i = 0; i<m; i++)
@@ -105,6 +105,7 @@ public class main {
     	    				if(pil_Masukan==1)
     	    				{
     	    					check3=true;
+    	    					inputSPL();
     	    				}
     	    				else if (pil_Masukan==2)
     	    				{
