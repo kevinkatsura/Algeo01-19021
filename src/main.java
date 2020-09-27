@@ -277,8 +277,7 @@ public class main {
 		return res;
 	}
 
->>>>>>> 3b2f2c9f72fcceb25f18f3a5187b0ad14b56047c
-  
+
   public static void main(String[] args) {
 	    Scanner userInput = new Scanner(System.in);
 		
