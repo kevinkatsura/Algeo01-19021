@@ -1,4 +1,4 @@
-package tubes;
+package main;
 
 import java.util.*;
 import java.lang.*;
@@ -159,20 +159,40 @@ public class main {
 		for (int l = 0; l < matriks.length; l++) {
 			int indeksFound = 0;
 			int i = 0 ;
-			while(i < matriks[l].length && indeksFound != 0){
+			while(i < matriks[l].length && indeksFound == 0){
 				if (matriks[l][i] != 0){
 					indeksFound = i ;
 				}
 				i++ ;
 			}
 			float temp = matriks[l][indeksFound] ;
-			for (int m = i; m < matriks[l].length; m++) {
+			for (int m = indeksFound; m < matriks[l].length; m++) {
 
 				matriks[l][m] = matriks[l][m]/temp ;
 			}
 
 		}
 		return matriks ;
+	}
+	static float[][] SPLGaussJordan(float[][] matriks){
+  		float[][] matriks =  new SPLGauss(float[][] matriks) ;
+		for (int i = matriks.length; i > 0 ; i--) {
+			for (int j = ; j < ; j--) {
+				int indeksFound = 0;
+				int n = 0 ;
+				while(n < matriks[l].length && indeksFound == 0){
+					if (matriks[l][n] != 0){
+						indeksFound = n ;
+					}
+					n++ ;
+				}
+				float temp = matriks[i][indeksFound] ;
+				for (int k = indeksFound; k < matriks[j].length ; k++) {
+					matriks[j][k] = matriks[j][k] - matriks[i][k]*matriks[j][k] ;
+
+				}
+			}
+		}
 	}
   
   public static void main(String[] args) {
