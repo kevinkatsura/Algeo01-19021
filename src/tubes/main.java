@@ -144,7 +144,10 @@ public class main {
 							Mtemp[i-1][j-1] = matriks[i][j];
 						}
 						else{
-							Mtemp[i-1][j] = matriks[i][j] ;
+							if (j==k){continue;}
+							else {
+								Mtemp[i - 1][j] = matriks[i][j];
+							}
 						}
 					}
 				}
@@ -211,6 +214,47 @@ public class main {
 		}
 		return matriks ;
 	}
+	public static float [] Cramer(float matriks [][])
+	{
+        /* I.S : persamaan dengan n peubah n persamaan
+                 input berupa matriks augmented */
+		/* F.S : menghasilkan array yang berisikan nilai peubah */
+
+		// memisahkan matriks augmented menjadi 2 matriks biasa
+		int i,j,k;
+		int m = matriks.length;
+
+		float [][]A = new float [m][m];
+		float []B = new float [m];
+		float []res = new float[m];
+		for (i=0; i<m; i++){
+			for (j=0; j<m; j++){
+				A[i][j] = matriks[i][j];
+			}
+		}
+		for (i=0; i<m; i++){
+			B[i] = matriks[i][matriks[0].length-1];
+		}
+		// mencari determinan matriks
+		float detA = DeterminanKofaktor(A);
+		// mencari determinan peubah (Dx, Dy, dst..)
+		for (k =0; k<m; k++){
+			// mengembalikan  matriks A
+			for (i=0; i<m; i++){
+				for (j=0; j<m; j++){
+					A[i][j] = matriks[i][j];
+				}
+			}
+			for (i=0; i<m; i++){
+				A[i][k] = B[i];
+			}
+			float Dx = DeterminanKofaktor(A);
+			res[k] = Dx/detA;
+		}
+
+		return res;
+	}
+
   
   public static void main(String[] args) {
 	    Scanner userInput = new Scanner(System.in);
