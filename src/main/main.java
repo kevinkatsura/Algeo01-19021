@@ -2,9 +2,10 @@ package main;
 
 import java.util.*;
 import java.lang.*;
-import java.io.*;
+import tubes.operator;
 
 public class main {
+<<<<<<< HEAD:src/main.java
   static float [][] inputSPL()
   {
 	  //membaca masukan dari keyboard
@@ -278,6 +279,9 @@ public class main {
 	}
 
 
+=======
+  
+>>>>>>> 6edcefe677a50e3308429e6bf108811bbe6b189e:src/main/main.java
   public static void main(String[] args) {
 	    Scanner userInput = new Scanner(System.in);
 		
@@ -325,7 +329,7 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    					inputSPL();
+	    	    					operator.inputSPL();
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
