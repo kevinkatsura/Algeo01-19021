@@ -7,3 +7,22 @@ Laporan terdiri dari:
 5. Bab 4: Eksperimen. Bab ini berisi hasil eksekusi program terhadap contoh contoh kasus yang diberikan berikut analisis hasil eksekusi tersebut
 6. Bab 5: Kesimpulan, saran, dan refleksi (hasil yang dicapai, saran pengembangan, dan refleksi anda terhadap tugas ini). 
 7. Tuliskan juga referensi (buku, web), yang dipakai/diacu di dalam Daftar Referensi.
+
+*** SPL ***
+eliminasi gauss             V
+metode matriks balikan
+kaidah cramer               V
+
+*** Determinan ***
+reduksi baris               V
+kofaktor                    V
+
+
+***
+interpolasi
+regresi linier
+matriks balikan
+
+***
+baca matiks keyboard        V
+baca matriks file           V
