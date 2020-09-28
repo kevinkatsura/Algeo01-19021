@@ -191,9 +191,9 @@ public class operator {
             }
         }
         for (int l = 0; l < matriks.length; l++) {
-            int indeksFound = 0;
+            int indeksFound = -1;
             int i = 0 ;
-            while(i < matriks[l].length && indeksFound != 0){
+            while(i < matriks[l].length && indeksFound == -1){
                 if (matriks[l][i] != 0){
                     indeksFound = i ;
                 }
@@ -205,6 +205,30 @@ public class operator {
                 matriks[l][m] = matriks[l][m]/temp ;
             }
 
+        }
+        return matriks ;
+    }
+
+    public static float[][] SPLGaussJordan(float[][] matriksinput) {
+        float[][] matriks = SPLGauss(matriksinput) ;
+        for (int i = matriks.length-1; i >= 1 ; i--) {
+            int indeksFound = -1;
+            int l = 0 ;
+            while(l < matriks[i].length && indeksFound == -1){
+                if (matriks[i][l] != 0){
+                    indeksFound = l ;
+                }
+                l++ ;
+            }
+            float rep1 = matriks[i][indeksFound] ;
+            if (l != matriks[i].length) {
+                for (int j = i-1; j >= 0; j--) {
+                    float rep2 = matriks[j][indeksFound] ;
+                    for (int k = 0; k < matriks[j].length; k++) {
+                        matriks[j][k] = matriks[j][k] - (matriks[i][k]/rep1)*rep2 ;
+                    }
+                }
+            }
         }
         return matriks ;
     }
@@ -248,5 +272,4 @@ public class operator {
 
         return res;
     }
-
 }
