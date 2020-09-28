@@ -10,7 +10,7 @@ Laporan terdiri dari:
 
 *** SPL ***
 eliminasi gauss             V
-eliminasi gaus jordan
+eliminasi gaus jordan       v
 metode matriks balikan
 kaidah cramer               V
 
@@ -22,8 +22,12 @@ kofaktor                    V
 ***
 interpolasi
 regresi linier
-matriks balikan
+matriks balikan		    v
 
 ***
-baca matiks keyboard        V
+baca matriks keyboard       V
+baca interpolasi keyboard
+baca regresi keyboard
 baca matriks file           V
+baca interpolasi file
+baca regresi file
