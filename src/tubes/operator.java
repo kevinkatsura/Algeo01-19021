@@ -54,6 +54,31 @@ public class operator {
         userInput.close();
         return Matriks;
     }
+    
+    public static float [][] inputDet()
+    {
+        //membaca masukan dari keyboard
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Masukkan banyak peubah (n) :");
+        int n = userInput.nextInt();
+        //melakukan inisiasi array
+        float [][] A= new float[n][n];
+        
+
+        System.out.println("Masukkan koefisien A[i][j] : ");
+        //menerima masukan koefisien a[i][j]
+        for(int i = 0; i<n; i++)
+        {
+            for(int j = 0; j<n; j++)
+            {
+                System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
+                A[i][j]  = userInput.nextInt();
+            }
+        }
+
+        userInput.close();
+        return A;
+    }
     public static void tukarBaris(float[][] Matriks, int i, int j)
     {
         //tukar elemen baris i dengan baris j
