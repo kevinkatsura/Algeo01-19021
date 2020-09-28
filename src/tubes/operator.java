@@ -272,4 +272,103 @@ public class operator {
 
         return res;
     }
+    public static float [][] Transpose ( float[][] Matriks)
+    {
+        int i,j;
+        int baris = Matriks.length;
+        int kolom = Matriks[0].length;
+        float [][] Mtrans = new float [kolom][baris];
+        for (i=0; i<kolom; i++){
+            for (j=0; j<baris; j++){
+                Mtrans[i][j] = Matriks[j][i];
+            }
+        }
+        return Mtrans;
+    }
+
+    public static float [][] Adjoint ( float [][] Matriks)
+    {
+        // I.S  : Matriks yang di input merupakan matriks bujursangkar
+        // F.S  : Mengembalikan matriks adjoint matriks inputan
+
+        int i,j,k,l;
+        int len = Matriks.length;
+
+        float[][] Mtemp = new float[len-1][len-1];
+        float[][] Adj = new float [len][len];
+
+        for (k = 0; k < len; k++){
+            for (l=0; l<len; l++){
+                for (i=0; i<len; i++){
+                    for (j=0; j<len; j++){
+                        if (i==k){continue;}
+                        else{
+                            if (j==l){continue;}
+                            else{
+                                if ((i>k)&&(j>l)){
+                                    Mtemp[i-1][j-1] = Matriks[i][j];
+                                }
+                                else if ((i>k)&&(j<l)){
+                                    Mtemp[i-1][j]= Matriks[i][j];
+                                }
+                                else if ((i<k)&&(j>l)){
+                                    Mtemp[i][j-1] = Matriks[i][j];
+                                }
+                                else {
+                                    Mtemp[i][j] = Matriks[i][j];
+                                }
+                            }
+                        }
+                    }
+                }
+                if ((k+l)%2 ==0){
+                    Adj[k][l] = DeterminanKofaktor(Mtemp);
+                }
+                else{
+                    Adj[k][l] = -DeterminanKofaktor(Mtemp);
+                }
+            }
+        }
+        // Mentranspose kofaktor matriks (Adj)
+        Adj = Transpose(Adj);
+        return Adj;
+    }
+    public static float [][] MatriksInvers (float [][] Matriks)
+    {
+        // I.S      : Matriks masukan merupakan matriks persegi
+        // F.S      : mengembalikan matriks invers dari matriks masukan
+
+        int i,j;
+        int len = Matriks.length;
+        float [][] Adj;
+        float [][] MInvers = new float[len][len];
+        float faktor;
+        faktor = 1/DeterminanKofaktor(Matriks);
+        Adj = Adjoint(Matriks);
+
+        for (i=0; i<len; i++){
+            for (j=0; j<len; j++){
+                MInvers[i][j] = faktor*Adj[i][j];
+            }
+        }
+        return MInvers;
+    }
+    public static void TulisMatriks(float [][] Matriks)
+    {
+        // Prosedur mencetak matriks
+        int i,j;
+        int baris = Matriks.length;
+        int kolom = Matriks[0].length;
+
+        for (i=0; i<baris; i++){
+            for (j=0; j<kolom; j++){
+                if (j==kolom-1){
+                    System.out.println(Matriks[i][j]);
+                }
+                else {
+                    System.out.print(Matriks[i][j]+" ");
+                }
+            }
+        }
+    }
 }
