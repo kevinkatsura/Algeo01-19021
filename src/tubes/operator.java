@@ -79,6 +79,47 @@ public class operator {
         userInput.close();
         return A;
     }
+
+    public static double [][] inputInterpolasi()
+    {
+	//membaca masukan dari keyboard
+	Scanner userInput = new Scanner(System.in);
+        System.out.print("Masukkan banyak titik (n) :");
+        int n = userInput.nextInt();
+        //melakukan inisiasi array
+        double [][] Titik= new double[1][n];
+
+        System.out.println("Masukkan titik : ");
+        //menerima masukan koefisien a[1][n]
+        for(int i = 0; i<=n; i++)
+        {
+        	for(int j = 0; j<=1; j++)
+            {	
+        		System.out.print("Titik ke-"+i+" = ");
+        		Titik[i][j]  = userInput.nextInt();
+        
+            }
+        }
+        double [][] Matriks = new double [n][n-1];
+        
+        
+        for (int k=0; k<n;k++ )
+        {
+        	int m=0;
+        	for (int l=0; l<n;l++)
+        	{
+        		Matriks [k][l] = Math.pow(Titik [k][0], l); 
+        		m = m+1;
+        	}
+        	if (m==n)
+        	{
+        		Matriks [k][m] = Titik [k][1];
+        	}
+        }
+        userInput.close();
+        return Matriks;
+    }
+
     public static void tukarBaris(float[][] Matriks, int i, int j)
     {
         //tukar elemen baris i dengan baris j
