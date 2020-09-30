@@ -229,12 +229,12 @@ public class operator {
     public static float DeterminanReduksiBaris(float[][] matriks) {
         for (int n = 0; n < matriks.length-1 ; n++) {
             for (int i = n+1; i < matriks.length; i++) {
+                float rep = matriks[i][n] ;
                 for (int k = n; k < matriks[0].length; k++) {
-                    matriks[i][k] = matriks[i][k] - ((matriks[n][k] * matriks[i][n]) / matriks[n][n]);
+                    matriks[i][k] = matriks[i][k] - ((matriks[n][k] * rep) / matriks[n][n]);
                 }
             }
         }
-        System.out.println(Arrays.deepToString(matriks));
         float det = 1 ;
         for (int i = 0; i < matriks.length; i++) {
             det *= matriks[i][i] ;
@@ -245,8 +245,9 @@ public class operator {
 
         for (int n = 0; n < matriks.length-1 ; n++) {
             for (int i = n+1; i < matriks.length; i++) {
-                for (int k = n; k < matriks[i].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-((matriks[n][k]*matriks[i][n])/matriks[n][n]) ;
+                float rep = matriks[i][n] ;
+                for (int k = n; k < matriks[0].length; k++) {
+                    matriks[i][k] = matriks[i][k] - ((matriks[n][k] * rep) / matriks[n][n]);
                 }
             }
             for (int i = n+1; i < matriks.length; i++) {
@@ -351,16 +352,16 @@ public class operator {
                     }
                 }
                 if (found){
-                    System.out.println("Matriks Tidak memiliki Solusi");
+                    System.out.println("Matriks Tidak Memiliki Solusi");
                     break ;
                 }
             }
             if (!found){
                 for (int i = 0 ; i <= matriks.length-2 ; i++) {
                     if (matriks[i][i] != 0 ) {
-                        System.out.printf("X%d = %f\n", (i + 1), matriks[i][matriks[i].length - 1]);
+                        System.out.printf("X%d = %.2f\n", (i + 1), matriks[i][matriks[i].length - 1]);
                         if (i == (matriks.length - 2) && matriks[i+1][i+1] != 0 ) {
-                            System.out.printf("X%d = %f\n", (i + 2), matriks[i + 1][matriks[i + 1].length - 1]);
+                            System.out.printf("X%d = %.2f\n", (i + 2), matriks[i + 1][matriks[i + 1].length - 1]);
                         }
                     }
                 }
@@ -380,10 +381,10 @@ public class operator {
                 }
                 for (int j = matriks[i].length-1; j >= a+1; j--) {
                     if (j == matriks[i].length-1){
-                        System.out.printf("Solusi X-%d adalah %f",a+1,matriks[i][j]);
+                        System.out.printf("Solusi X-%d adalah %.2f",a+1,matriks[i][j]);
                     }
                     else{
-                        System.out.printf("%+fX%d",-matriks[i][j],(j+1));
+                        System.out.printf("%+.2fX%d",-matriks[i][j],(j+1));
                     }
                 }
                 System.out.println("");

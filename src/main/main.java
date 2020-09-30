@@ -53,9 +53,8 @@ public class main {
 	    	    				{
 	    	    					check3=true;
 	    	    					float[][]matriks = operator.inputSPL();
-	    	    					operator.TulisMatriks(matriks);
 	    	    					float[][] matrix = operator.SPLGauss(matriks);
-									System.out.print(Arrays.deepToString(matrix));
+	    	    					operator.MenulisSolusiSPLGauss(matrix);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
