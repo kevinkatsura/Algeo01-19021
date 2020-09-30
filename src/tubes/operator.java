@@ -2,6 +2,7 @@ package tubes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class operator {
@@ -57,7 +58,7 @@ public class operator {
     public static void tukarBaris(float[][] Matriks, int i, int j)
     {
         //tukar elemen baris i dengan baris j
-        int N = Matriks.length;
+        int N = Matriks[i].length-1;
         for (int k=0; k<=N; k++)
         {
             float Temp = Matriks[i][k];
@@ -179,32 +180,49 @@ public class operator {
     }
     static float[][] SPLGauss(float[][] matriks) {
 
-        float representation1,representation2 ;
-        for (int i = 1; i < matriks.length; i++) {
-            for (int j = 0; j < i ; j++) {
-                representation1 = matriks[i-1][j] ;
-                representation2 = matriks[i][j] ;
-                for (int k = j; k < matriks[0].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
+        for (int n = 0; n < matriks.length-1 ; n++) {
+            for (int i = n+1; i < matriks.length; i++) {
+                for (int k = n; k < matriks[i].length ; k++) {
+                    matriks[i][k] = matriks[i][k]-(matriks[n][k]/matriks[n][n])*matriks[i][n] ;
                 }
-
+            }
+            for (int i = n+1; i < matriks.length; i++) {
+                if(matriks[i][n+1] == 0 && i != matriks.length-1){
+                    int j = matriks.length -1 ;
+                    boolean found = (matriks[j][n+1] != 0) ;
+                    while(!found && j > i ){
+                        if (matriks[j][n+1] != 0){
+                            found = true ;
+                        }
+                        else{
+                            j-- ;
+                        }
+                    }
+                    if (found){
+                        tukarBaris(matriks,i,j);
+                    }
+                }
             }
         }
+
         for (int l = 0; l < matriks.length; l++) {
             int indeksFound = -1;
             int i = 0 ;
-            while(i < matriks[l].length && indeksFound == -1){
+            boolean found = (matriks[l][i] != 0) ;
+            while(i < matriks[l].length-1 && !found ){
                 if (matriks[l][i] != 0){
                     indeksFound = i ;
+                    found = true ;
                 }
                 i++ ;
             }
-            float temp = matriks[l][indeksFound] ;
-            for (int m = i; m < matriks[l].length; m++) {
+            if (indeksFound != -1) {
+                float temp = matriks[l][indeksFound];
+                for (int m = indeksFound; m < matriks[l].length; m++) {
 
-                matriks[l][m] = matriks[l][m]/temp ;
+                    matriks[l][m] = matriks[l][m] / temp;
+                }
             }
-
         }
         return matriks ;
     }
@@ -232,6 +250,75 @@ public class operator {
         }
         return matriks ;
     }
+
+    public static float[][] KaliMatriks(float[][] matriks1, float[][] matriks2) {
+        float [][] matriks = new float[matriks1.length][matriks2[0].length] ;
+        if (matriks1[0].length == matriks2.length){
+            for (int i = 0; i < matriks1.length; i++) {
+                for (int j = 0; j < matriks2[0].length ; j++) {
+                    int sum = 0 ;
+                    for (int k = 0; k < matriks2.length ; k++) {
+                        sum += matriks1[i][k]*matriks2[k][j] ;
+                    }
+                    matriks[i][j] = sum ;
+                }
+            }
+        }
+        return matriks ;
+    }
+
+    public static void MenulisSolusiSPLGauss(float[][] matriks) {
+        if (matriks.length == matriks[0].length-1){
+            for (int i = 0 ; i <= matriks.length-2 ; i++) {
+                for (int j = i+1; j <= matriks.length-1 ; j++) {
+                    for (int k = 0; k < matriks[i].length; k++) {
+                        matriks[i][k] = matriks[i][k] - matriks[j-1][j]*matriks[j][k] ;
+                    }
+                }
+                if (matriks[i][i] != 0) {
+                    System.out.printf("X%d = %f\n", (i + 1), matriks[i][matriks[i].length - 1]);
+                    if (i == (matriks.length - 2) && matriks[i+1][i+1] != 0 ) {
+                        System.out.printf("X%d = %f\n", (i + 2), matriks[i + 1][matriks[i + 1].length - 1]);
+                    }
+                }
+            }
+
+        }
+        else{
+            for (int i = 0; i < matriks.length ; i++) {
+                int a = 0;
+                boolean found = (matriks[i][a] != 0) ;
+                while ( !found && a < matriks[i].length){
+                    if (matriks[i][a] != 0){
+                        found = true ;
+                    }
+                    else{
+                        a++ ;
+                    }
+                }
+                for (int j = matriks[i].length-1; j >= a+1; j--) {
+                    if (j == matriks[i].length-1){
+                        System.out.printf("Solusi X-%d adalah %f",a+1,matriks[i][j]);
+                    }
+                    else{
+                        System.out.printf("%+fX%d",-matriks[i][j],(j+1));
+                    }
+                }
+                System.out.println("");
+            }
+        }
+    }
+
+    public static void MenulisSolusiSPLGaussJordan(float[][] matriks) {
+        if (matriks.length == matriks[0].length-1){
+            for (int i = 0 ; i < matriks.length ; i++) {
+                if (matriks[i][i] != 0){
+                    System.out.printf("X-%d = %f\n",i+1,matriks[i][matriks[i].length-1]);
+                }
+            }
+        }
+    }
+
     public static float [] Cramer(float matriks [][])
     {
         /* I.S : persamaan dengan n peubah n persamaan
