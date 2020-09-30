@@ -52,7 +52,10 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    					operator.inputSPL();
+	    	    					float[][]matriks = operator.inputSPL();
+	    	    					operator.TulisMatriks(matriks);
+	    	    					float[][] matrix = operator.SPLGauss(matriks);
+									System.out.print(Arrays.deepToString(matrix));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -169,6 +172,8 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
+	    	    					float[][] matriks = operator.inputDet() ;
+									System.out.println(operator.DeterminanReduksiBaris(matriks));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -193,6 +198,8 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
+									float[][] matriks = operator.inputDet() ;
+									System.out.println(operator.DeterminanKofaktor(matriks));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{

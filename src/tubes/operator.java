@@ -3,6 +3,7 @@ package tubes;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class operator {
@@ -226,35 +227,31 @@ public class operator {
         }
     }
     public static float DeterminanReduksiBaris(float[][] matriks) {
-        float representation1,representation2 ;
-
-        for (int i = 1; i < matriks.length; i++) {
-            for (int j = 0; j < i ; j++) {
-                representation1 = matriks[i-1][j] ;
-                representation2 = matriks[i][j] ;
-                for (int k = j; k < matriks[0].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
+        for (int n = 0; n < matriks.length-1 ; n++) {
+            for (int i = n+1; i < matriks.length; i++) {
+                for (int k = n; k < matriks[0].length; k++) {
+                    matriks[i][k] = matriks[i][k] - ((matriks[n][k] * matriks[i][n]) / matriks[n][n]);
                 }
-
             }
         }
+        System.out.println(Arrays.deepToString(matriks));
         float det = 1 ;
         for (int i = 0; i < matriks.length; i++) {
             det *= matriks[i][i] ;
         }
         return det ;
     }
-    static float[][] SPLGauss(float[][] matriks) {
+    public static float[][] SPLGauss(float[][] matriks) {
 
         for (int n = 0; n < matriks.length-1 ; n++) {
             for (int i = n+1; i < matriks.length; i++) {
                 for (int k = n; k < matriks[i].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-(matriks[n][k]/matriks[n][n])*matriks[i][n] ;
+                    matriks[i][k] = matriks[i][k]-((matriks[n][k]*matriks[i][n])/matriks[n][n]) ;
                 }
             }
             for (int i = n+1; i < matriks.length; i++) {
                 if(matriks[i][n+1] == 0 && i != matriks.length-1){
-                    int j = matriks.length -1 ;
+                    int j = matriks.length-1 ;
                     boolean found = (matriks[j][n+1] != 0) ;
                     while(!found && j > i ){
                         if (matriks[j][n+1] != 0){
@@ -341,14 +338,33 @@ public class operator {
                         matriks[i][k] = matriks[i][k] - matriks[j-1][j]*matriks[j][k] ;
                     }
                 }
-                if (matriks[i][i] != 0) {
-                    System.out.printf("X%d = %f\n", (i + 1), matriks[i][matriks[i].length - 1]);
-                    if (i == (matriks.length - 2) && matriks[i+1][i+1] != 0 ) {
-                        System.out.printf("X%d = %f\n", (i + 2), matriks[i + 1][matriks[i + 1].length - 1]);
+            }
+            boolean found = false ;
+            for (int i = matriks.length-1; i>=0; i--) {
+                int k = 0 ;
+                while(!found && k < matriks[i].length){
+                    if (k == matriks[i].length-1 && matriks[i][k] != 0){
+                        found = true ;
+                    }
+                    else{
+                        k++ ;
+                    }
+                }
+                if (found){
+                    System.out.println("Matriks Tidak memiliki Solusi");
+                    break ;
+                }
+            }
+            if (!found){
+                for (int i = 0 ; i <= matriks.length-2 ; i++) {
+                    if (matriks[i][i] != 0 ) {
+                        System.out.printf("X%d = %f\n", (i + 1), matriks[i][matriks[i].length - 1]);
+                        if (i == (matriks.length - 2) && matriks[i+1][i+1] != 0 ) {
+                            System.out.printf("X%d = %f\n", (i + 2), matriks[i + 1][matriks[i + 1].length - 1]);
+                        }
                     }
                 }
             }
-
         }
         else{
             for (int i = 0; i < matriks.length ; i++) {
