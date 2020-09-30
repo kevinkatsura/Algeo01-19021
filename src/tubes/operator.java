@@ -7,18 +7,20 @@ import java.util.Scanner;
 public class operator {
     public static float [][] inputSPL()
     {
-        //membaca masukan dari keyboard
+        //membaca masukan banyak persamaan dan peubah dari keyboard 
         Scanner userInput = new Scanner(System.in);
         System.out.print("Masukkan banyak persamaan (m) : ");
         int m = userInput.nextInt();
         System.out.print("Masukkan banyak peubah (n) :");
         int n = userInput.nextInt();
+
         //melakukan inisiasi array
         float [][] A= new float[m][n];
         float [] B= new float[m];
+	float [][] Matriks = new float [m][n+1];
 
+	//menerima masukan koefisien a[i][j]
         System.out.println("Masukkan koefisien A[i][j] : ");
-        //menerima masukan koefisien a[i][j]
         for(int i = 0; i<m; i++)
         {
             for(int j = 0; j<n; j++)
@@ -36,8 +38,6 @@ public class operator {
             B[k]  = userInput.nextFloat();
         }
 
-        float [][] Matriks = new float [m][n+1];
-
         //membentuk matriks augmented dari masukan yang ada
         for(int i = 0; i<m; i++)
         {
@@ -51,6 +51,8 @@ public class operator {
         {
             Matriks[k][n]  = B[k];
         }
+
+	//mengembalikan matriks
         userInput.close();
         return Matriks;
     }
@@ -80,35 +82,63 @@ public class operator {
         return A;
     }
 
-    public static double [][] inputInterpolasi()
+    public static float pangkat (float a, int b)
     {
-	//membaca masukan dari keyboard
-	Scanner userInput = new Scanner(System.in);
-        System.out.print("Masukkan banyak titik (n) :");
-        int n = userInput.nextInt();
-        //melakukan inisiasi array
-        double [][] Titik= new double[1][n];
+	//fungsi pangkat (mirip pow tapi untuk tipe float)
+    	
+	//inisiasi variabel
+	float hasil = 1;
+    	float temp = 0;
 
+	//penanganan jika pangkat 0 akan menghasilkan nilai 1
+    	if (b==0)
+    	{
+    		hasil = 1;
+    	}
+
+	//penanganan jika pangkat > 0
+    	else
+    	{
+    		for (int i=1; i<=b;i++)
+    		{
+    			temp = hasil * a;
+    			hasil = temp;
+    		}
+    	}
+
+	//mengembalikan hasil pangkat
+    	return hasil;
+    }
+
+    public static float [][] inputInterpolasi()
+    {
+	//membaca masukan banyak titik dari keyboard
+	Scanner userInput = new Scanner(System.in);
+	System.out.print("Masukkan banyak titik (n) :");
+        int n = userInput.nextInt();
+        
+	//melakukan inisiasi array
+        float [][] Titik= new float[n][2];
+	float [][] Matriks = new float [n][n+1];
+        
+	//menerima masukan koordinat x dan y sebanyak n titik
         System.out.println("Masukkan titik : ");
-        //menerima masukan koefisien a[1][n]
-        for(int i = 0; i<=n; i++)
+        for(int i = 0; i<n; i++)
         {
+        	System.out.print("Titik ke-"+(i+1)+" = ");
         	for(int j = 0; j<=1; j++)
             {	
-        		System.out.print("Titik ke-"+i+" = ");
-        		Titik[i][j]  = userInput.nextInt();
-        
+        		Titik[i][j]  = userInput.nextFloat();
             }
         }
-        double [][] Matriks = new double [n][n-1];
         
-        
+        //membuat masukan titik yang ada menjadi persamaan dan mengubahnya menjadi matriks augmented
         for (int k=0; k<n;k++ )
         {
         	int m=0;
         	for (int l=0; l<n;l++)
         	{
-        		Matriks [k][l] = Math.pow(Titik [k][0], l); 
+        		Matriks [k][l] = pangkat(Titik [k][0], l); 
         		m = m+1;
         	}
         	if (m==n)
@@ -116,6 +146,8 @@ public class operator {
         		Matriks [k][m] = Titik [k][1];
         	}
         }
+
+	//mengembalikan matriks berupa matriks augmented
         userInput.close();
         return Matriks;
     }
@@ -131,6 +163,7 @@ public class operator {
             Matriks[j][k] = Temp;
         }
     }
+
     public static void bacaSPL()
     {
         //kamus
