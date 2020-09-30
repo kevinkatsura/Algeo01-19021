@@ -24,7 +24,7 @@ public class operator {
             for(int j = 0; j<n; j++)
             {
                 System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
-                A[i][j]  = userInput.nextInt();
+                A[i][j]  = userInput.nextFloat();
             }
         }
 
@@ -33,7 +33,7 @@ public class operator {
         for(int k = 0; k<m; k++)
         {
             System.out.print("B["+ (k+1) +"] = ");
-            B[k]  = userInput.nextInt();
+            B[k]  = userInput.nextFloat();
         }
 
         float [][] Matriks = new float [m][n+1];
