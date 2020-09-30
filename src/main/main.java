@@ -52,7 +52,7 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    					operator.inputSPL();
+	    	    					operator.keyboardSPL();
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{

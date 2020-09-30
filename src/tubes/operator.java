@@ -397,40 +397,46 @@ public class operator {
         float[][] Mtemp = new float[len-1][len-1];
         float[][] Adj = new float [len][len];
 
-        for (k = 0; k < len; k++){
-            for (l=0; l<len; l++){
-                for (i=0; i<len; i++){
-                    for (j=0; j<len; j++){
-                        if (i==k){continue;}
-                        else{
-                            if (j==l){continue;}
-                            else{
-                                if ((i>k)&&(j>l)){
-                                    Mtemp[i-1][j-1] = Matriks[i][j];
-                                }
-                                else if ((i>k)&&(j<l)){
-                                    Mtemp[i-1][j]= Matriks[i][j];
-                                }
-                                else if ((i<k)&&(j>l)){
-                                    Mtemp[i][j-1] = Matriks[i][j];
-                                }
-                                else {
-                                    Mtemp[i][j] = Matriks[i][j];
+        if (len==2){
+            Adj[0][0] = Matriks[1][1];
+            Adj[0][1] = -Matriks[1][0];
+            Adj[1][0] = -Matriks[0][1];
+            Adj[1][1] = Matriks[0][0];
+        }
+        else {
+            for (k = 0; k < len; k++) {
+                for (l = 0; l < len; l++) {
+                    for (i = 0; i < len; i++) {
+                        for (j = 0; j < len; j++) {
+                            if (i == k) {
+                                continue;
+                            } else {
+                                if (j == l) {
+                                    continue;
+                                } else {
+                                    if ((i > k) && (j > l)) {
+                                        Mtemp[i - 1][j - 1] = Matriks[i][j];
+                                    } else if ((i > k) && (j < l)) {
+                                        Mtemp[i - 1][j] = Matriks[i][j];
+                                    } else if ((i < k) && (j > l)) {
+                                        Mtemp[i][j - 1] = Matriks[i][j];
+                                    } else {
+                                        Mtemp[i][j] = Matriks[i][j];
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                if ((k+l)%2 ==0){
-                    Adj[k][l] = DeterminanKofaktor(Mtemp);
-                }
-                else{
-                    Adj[k][l] = -DeterminanKofaktor(Mtemp);
+                    if ((k + l) % 2 == 0) {
+                        Adj[k][l] = DeterminanKofaktor(Mtemp);
+                    } else {
+                        Adj[k][l] = -DeterminanKofaktor(Mtemp);
+                    }
                 }
             }
+            // Mentranspose kofaktor matriks (Adj)
+            Adj = Transpose(Adj);
         }
-        // Mentranspose kofaktor matriks (Adj)
-        Adj = Transpose(Adj);
         return Adj;
     }
     public static float [][] MatriksInvers (float [][] Matriks)
