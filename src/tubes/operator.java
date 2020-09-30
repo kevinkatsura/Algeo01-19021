@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class operator {
-    public static float [][] inputSPL()
+    public static float [][] keyboardSPL()
     {
         //membaca masukan banyak persamaan dan peubah dari keyboard 
         Scanner userInput = new Scanner(System.in);
         System.out.print("Masukkan banyak persamaan (m) : ");
         int m = userInput.nextInt();
-        System.out.print("Masukkan banyak peubah (n) :");
+        System.out.print("Masukkan banyak peubah (n) : ");
         int n = userInput.nextInt();
 
         //melakukan inisiasi array
@@ -51,35 +51,36 @@ public class operator {
         {
             Matriks[k][n]  = B[k];
         }
+	userInput.close();
 
 	//mengembalikan matriks berupa matriks augmented
-        userInput.close();
         return Matriks;
     }
     
-    public static float [][] inputDet()
+    public static float [][] keyboardDetBalikan()
     {
-        //membaca masukan dari keyboard
+        //membaca masukan ukuran matriks dari keyboard
         Scanner userInput = new Scanner(System.in);
-        System.out.print("Masukkan banyak peubah (n) :");
+        System.out.print("Masukkan ukuran matriks (n) : ");
         int n = userInput.nextInt();
+       
         //melakukan inisiasi array
-        float [][] A= new float[n][n];
+        float [][] Matriks= new float[n][n];
         
-
-        System.out.println("Masukkan koefisien A[i][j] : ");
         //menerima masukan koefisien a[i][j]
+	System.out.println("Masukkan koefisien A[i][j] : ");
         for(int i = 0; i<n; i++)
         {
             for(int j = 0; j<n; j++)
             {
                 System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
-                A[i][j]  = userInput.nextInt();
+                Matriks[i][j]  = userInput.nextFloat();
             }
         }
-
         userInput.close();
-        return A;
+	
+	//mengembalikan matriks
+        return Matriks;
     }
 
     public static float pangkat (float a, int b)
@@ -110,7 +111,7 @@ public class operator {
     	return hasil;
     }
 
-    public static float [][] inputInterpolasi()
+    public static float [][] keyboardInterpolasi()
     {
 	//membaca masukan banyak titik dari keyboard
 	Scanner userInput = new Scanner(System.in);
@@ -146,9 +147,9 @@ public class operator {
         		Matriks [k][m] = Titik [k][1];
         	}
         }
+	userInput.close();
 
 	//mengembalikan matriks berupa matriks augmented
-        userInput.close();
         return Matriks;
     }
 
