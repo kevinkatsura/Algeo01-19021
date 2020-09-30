@@ -52,7 +52,7 @@ public class operator {
             Matriks[k][n]  = B[k];
         }
 
-	//mengembalikan matriks
+	//mengembalikan matriks berupa matriks augmented
         userInput.close();
         return Matriks;
     }
