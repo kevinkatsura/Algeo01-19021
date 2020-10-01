@@ -288,26 +288,27 @@ public class operator {
         }
     }
 
-    public static float[] SubsitusiMundur(float[][] matriks) {
-        float [] temp = new float[matriks[0].length-2] ;
-        for (int i = matriks.length - 1; i >= 1; i--) {
-            float rep1 = matriks[i][IndeksAwalBaris(i, matriks)];
+    public static float[] SubsitusiMundur(tubes.MATRIKS matriks) {
+        float [] temp = new float[matriks.NKolEff-2] ;
+        for (int i = matriks.NBrsEff - 1; i >= 1; i--) {
+            float rep1 = matriks.Tab[i][IndeksAwalBaris(i, matriks.Tab)];
             for (int j = i - 1; j >= 0; j--) {
-                float rep2 = matriks[j][IndeksAwalBaris(i,matriks)];
-                for (int k = IndeksAwalBaris(i,matriks); k < matriks[j].length; k++) {
-                    matriks[j][k] = matriks[j][k] - (matriks[i][k] / rep1) * rep2;
+                float rep2 = matriks.Tab[j][IndeksAwalBaris(i,matriks.Tab)];
+                for (int k = IndeksAwalBaris(i,matriks.Tab); k < matriks.NKolEff; k++) {
+                    matriks.Tab[j][k] = matriks.Tab[j][k] - (matriks.Tab[i][k] / rep1) * rep2;
                 }
             }
-            temp[i] = matriks[i][matriks[i].length-1] ;
+            temp[i] = matriks.Tab[i][matriks.Tab[i].length-1] ;
             if (i == 1){
-                temp[i-1] = matriks[i-1][matriks[i-1].length-1] ;
+                temp[i-1] = matriks.Tab[i-1][matriks.Tab[i-1].length-1] ;
             }
         }
         return temp;
     }
 
-    public static void MenulisSolusiSPL(float[][] matriks) {
-        float[][] NewMatrix = RemoveZeroRow(matriks);
+    public static void MenulisSolusiSPL(tubes.MATRIKS matriks) {
+        tubes.MATRIKS NewMatrix = new tubes.MATRIKS() ;
+        NewMatrix.Tab = RemoveZeroRow(matriks.Tab);
         if (NewMatrix.length == NewMatrix[0].length-1){
             if(IsNoSolution(NewMatrix)){
                 System.out.println();
