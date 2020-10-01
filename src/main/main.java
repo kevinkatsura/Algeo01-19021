@@ -196,6 +196,7 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
+	    	    					operator.Cramer(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
