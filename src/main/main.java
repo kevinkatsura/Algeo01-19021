@@ -1,4 +1,4 @@
-package tubes;
+package tubes ;
 
 import java.util.*;
 import java.io.*;
@@ -6,7 +6,7 @@ import java.lang.*;
 import tubes.operator;
 import tubes.MATRIKS;
 
-public class main {
+public static class main {
   public static void main(String[] args) {
 	    Scanner userInput = new Scanner(System.in);
 		
@@ -197,6 +197,7 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
+	    	    					operator.Cramer(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{

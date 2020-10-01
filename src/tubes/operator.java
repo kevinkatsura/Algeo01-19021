@@ -1,10 +1,11 @@
-package tubes;
+package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Scanner;
+import tubes.MATRIKS;
 
 public class operator {
 
@@ -368,17 +369,17 @@ public class operator {
         }
     }
 
-    public  void MenulisSolusiSPLGaussJordan(float[][] matriks) {
-        if (matriks.length == matriks[0].length-1){
-            for (int i = 0 ; i < matriks.length ; i++) {
-                if (matriks[i][i] != 0){
-                    System.out.printf("X-%d = %.2f\n",i+1,matriks[i][matriks[i].length-1]);
+    public  void MenulisSolusiSPLGaussJordan(MATRIKS matriks) {
+        if (matriks.NBrsEff == matriks.NKolEff-1){
+            for (int i = 0 ; i < matriks.NBrsEff ; i++) {
+                if (matriks.Tab[i][i] != 0){
+                    System.out.printf("X-%d = %.2f\n",i+1,matriks.Tab[i][matriks.NKolEff-1]);
                 }
             }
         }
     }
 
-    public static void Cramer(float matriks [][])
+    public void Cramer(MATRIKS matriks)
     {
         /* I.S : persamaan dengan n peubah n persamaan
                  input berupa matriks augmented */
@@ -386,18 +387,20 @@ public class operator {
 
         // memisahkan matriks augmented menjadi 2 matriks biasa
         int i,j,k;
-        int m = matriks.length;
+        int m = matriks.NBrsEff;
 
-        float [][]A = new float [m][m];
+        MATRIKS A = new MATRIKS();
+        A.NBrsEff = m;
+        A.NKolEff = m;
         float []B = new float [m];
         float []res = new float[m];
         for (i=0; i<m; i++){
             for (j=0; j<m; j++){
-                A[i][j] = matriks[i][j];
+                A.Tab[i][j] = matriks.Tab[i][j];
             }
         }
         for (i=0; i<m; i++){
-            B[i] = matriks[i][matriks[0].length-1];
+            B[i] = matriks.Tab[i][matriks.NKolEff-1];
         }
         // mencari determinan matriks
         float detA = DeterminanKofaktor(A);
@@ -411,11 +414,11 @@ public class operator {
                 // mengembalikan  matriks A
                 for (i=0; i<m; i++){
                     for (j=0; j<m; j++){
-                        A[i][j] = matriks[i][j];
+                        A.Tab[i][j] = matriks.Tab[i][j];
                     }
                 }
                 for (i=0; i<m; i++){
-                    A[i][k] = B[i];
+                    A.Tab[i][k] = B[i];
                 }
                 float Dx = DeterminanKofaktor(A);
                 res[k] = Dx/detA;
@@ -428,36 +431,42 @@ public class operator {
 
     }
 
-    public static float [][] Transpose ( float[][] Matriks)
+    public MATRIKS Transpose ( MATRIKS Matriks)
     {
         int i,j;
-        int baris = Matriks.length;
-        int kolom = Matriks[0].length;
-        float [][] Mtrans = new float [kolom][baris];
+        int baris = Matriks.NBrsEff;
+        int kolom = Matriks.NKolEff;
+        MATRIKS Mtrans = new MATRIKS();
+        Mtrans.NBrsEff = kolom;
+        Mtrans.NKolEff = baris;
         for (i=0; i<kolom; i++){
             for (j=0; j<baris; j++){
-                Mtrans[i][j] = Matriks[j][i];
+                Mtrans.Tab[i][j] = Matriks.Tab[j][i];
             }
         }
         return Mtrans;
     }
 
-    public static float [][] Adjoint ( float [][] Matriks)
+    public MATRIKS Adjoint ( MATRIKS Matriks)
     {
         // I.S  : Matriks yang di input merupakan matriks bujursangkar
         // F.S  : Mengembalikan matriks adjoint matriks inputan
 
         int i,j,k,l;
-        int len = Matriks.length;
+        int len = Matriks.NBrsEff;
 
-        float[][] Mtemp = new float[len-1][len-1];
-        float[][] Adj = new float [len][len];
+        MATRIKS Mtemp = new MATRIKS();
+        Mtemp.NKolEff = len-1;
+        Mtemp.NBrsEff = len-1;
+        MATRIKS Adj = new MATRIKS();
+        Adj.NBrsEff = len;
+        Adj.NKolEff = len;
 
         if (len==2){
-            Adj[0][0] = Matriks[1][1];
-            Adj[0][1] = -Matriks[1][0];
-            Adj[1][0] = -Matriks[0][1];
-            Adj[1][1] = Matriks[0][0];
+            Adj.Tab[0][0] = Matriks.Tab[1][1];
+            Adj.Tab[0][1] = -Matriks.Tab[1][0];
+            Adj.Tab[1][0] = -Matriks.Tab[0][1];
+            Adj.Tab[1][1] = Matriks.Tab[0][0];
         }
         else {
             for (k = 0; k < len; k++) {
@@ -471,22 +480,22 @@ public class operator {
                                     continue;
                                 } else {
                                     if ((i > k) && (j > l)) {
-                                        Mtemp[i - 1][j - 1] = Matriks[i][j];
+                                        Mtemp.Tab[i - 1][j - 1] = Matriks.Tab[i][j];
                                     } else if ((i > k) && (j < l)) {
-                                        Mtemp[i - 1][j] = Matriks[i][j];
+                                        Mtemp.Tab[i - 1][j] = Matriks.Tab[i][j];
                                     } else if ((i < k) && (j > l)) {
-                                        Mtemp[i][j - 1] = Matriks[i][j];
+                                        Mtemp.Tab[i][j - 1] = Matriks.Tab[i][j];
                                     } else {
-                                        Mtemp[i][j] = Matriks[i][j];
+                                        Mtemp.Tab[i][j] = Matriks.Tab[i][j];
                                     }
                                 }
                             }
                         }
                     }
                     if ((k + l) % 2 == 0) {
-                        Adj[k][l] = DeterminanKofaktor(Mtemp);
+                        Adj.Tab[k][l] = DeterminanKofaktor(Mtemp);
                     } else {
-                        Adj[k][l] = -DeterminanKofaktor(Mtemp);
+                        Adj.Tab[k][l] = -DeterminanKofaktor(Mtemp);
                     }
                 }
             }
@@ -495,31 +504,40 @@ public class operator {
         }
         return Adj;
     }
-    public static float [][] MatriksInvers (float [][] Matriks)
+    public MATRIKS MatriksInvers (MATRIKS Matriks)
     {
         // I.S      : Matriks masukan merupakan matriks persegi
         // F.S      : mengembalikan matriks invers dari matriks masukan
 
         int i,j;
-        int len = Matriks.length;
-        float [][] Adj;
-        float [][] MInvers = new float[len][len];
+        int len = Matriks.NBrsEff;
+        MATRIKS Adj = new MATRIKS();
+        MATRIKS MInvers = new MATRIKS();
+        MInvers.NBrsEff = len;
+        MInvers.NKolEff = len;
         float faktor;
-        faktor = 1/DeterminanKofaktor(Matriks);
-        Adj = Adjoint(Matriks);
-
-        for (i=0; i<len; i++){
-            for (j=0; j<len; j++){
-                MInvers[i][j] = faktor*Adj[i][j];
-            }
+        float det = DeterminanKofaktor(Matriks);
+        if (det == 0){
+            System.out.println("Matriks tidak memiliki invers karena determinannya 0");
+            return Adj;
         }
-        return MInvers;
+        else{
+            faktor = 1/det;
+            Adj = Adjoint(Matriks);
+
+            for (i=0; i<len; i++){
+                for (j=0; j<len; j++){
+                    MInvers.Tab[i][j] = faktor*Adj.Tab[i][j];
+                }
+            }
+            return MInvers;
+        }
     }
-    public static void TulisMatriks(float [][] Matriks)
+    public static void TulisMatriks(MATRIKS Matriks)
     {
         // Prosedur mencetak matriks
-        for (int i = 0; i < Matriks.length; i++) {
-            System.out.println(Arrays.toString(Matriks[i]));
+        for (int i = 0; i < Matriks.NBrsEff; i++) {
+            System.out.println(Arrays.toString(Matriks.Tab[i]));
         }
     }
 }
