@@ -263,18 +263,18 @@ public class operator {
         return NewMatrix;
     }
 
-    public boolean IsAllDiagonalOne(float[][] matriks) {
+    public boolean IsAllDiagonalOne(MATRIKS matriks) {
         int a = 0 ;
         boolean IsAllOne ;
         do {
-            if (matriks[a][a] != 1){
+            if (matriks.Tab[a][a] != 1){
                 IsAllOne = false ;
             }
             else{
                 a++ ;
                 IsAllOne = true ;
             }
-        } while (IsAllOne && a < matriks.length) ;
+        } while (IsAllOne && a < matriks.NBrsEff) ;
         return IsAllOne ;
     }
 
