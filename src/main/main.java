@@ -258,18 +258,10 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-<<<<<<< HEAD
-									float[][] matriks = operator.keyboardDetBalikan();
-									System.out.println();
-									System.out.println("Mencari nilai Determinan dengan Metode Reduksi Baris");
-									System.out.printf("Determinan : %f",operator.DeterminanReduksiBaris(matriks));
-									System.out.println();
-=======
 	    	    					MATRIKS M = new MATRIKS();
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardDetBalikan(n);
->>>>>>> 6feb5859c990ec75b000985368d3537878944525
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
