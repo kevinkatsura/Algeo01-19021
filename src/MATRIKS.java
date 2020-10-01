@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class MATRIKS {
-    //atribut matriks
-    protected double[][] Tab = new double [100][100];
+	//atribut matriks
+	protected double[][] Tab = new double [100][100];
     protected int NBrsEff;
     protected int NKolEff;
     
@@ -121,7 +121,7 @@ public class MATRIKS {
     {
     	try
     	{
-    		File fileSaya = new File("C:\\Users\\OMEN\\eclipse-workspace\\tubes\\bin\\tubes\\"+namafile);
+    		File fileSaya = new File(namafile);
     		Scanner bacaBaris = new Scanner (fileSaya);
     		
     		if(bacaBaris.hasNextLine())
@@ -162,7 +162,7 @@ public class MATRIKS {
     		{
     			System.out.println("File Kosong");
     		}
-    		bacaBaris.close();
+    
     	}
     	catch (FileNotFoundException e)
     	{
