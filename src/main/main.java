@@ -1,8 +1,10 @@
-package main;
+package tubes;
 
 import java.util.*;
+import java.io.*;
 import java.lang.*;
 import tubes.operator;
+import tubes.MATRIKS;
 
 public class main {
   public static void main(String[] args) {
@@ -71,9 +73,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 									
 									
@@ -113,9 +116,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 									
 	    	    				}
@@ -155,9 +159,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 									
 	    	    				}
@@ -196,9 +201,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
-	    	    					System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							System.out.print("Masukkan nama file eksternal (.txt): ");
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -268,9 +274,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
-	    	    					System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							System.out.print("Masukkan nama file eksternal (.txt): ");
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -307,9 +314,10 @@ public class main {
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
 	    	    					MATRIKS M = new MATRIKS();
-	    	    					System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+	    							System.out.print("Masukkan nama file eksternal (.txt): ");
+	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -356,9 +364,10 @@ public class main {
 	    				else if (pil_Masukan==2)
 	    				{
 	    					check3=true;
+	    					Scanner file = new Scanner(System.in);
 	    					MATRIKS M = new MATRIKS();
-	    					System.out.print("Masukkan nama file eksternal (.txt): ");
-							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+							System.out.print("Masukkan nama file eksternal (.txt): ");
+							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 							M.BacaFileMatriks(namaFile);
 	    				}
 	    				else if (pil_Masukan==3)
@@ -383,6 +392,7 @@ public class main {
 					{
 						System.out.print("Masukkan pilihan : ");
 	    				pil_Masukan = userInput.nextInt();
+	    				float x;
 	    				if(pil_Masukan==1)
 	    				{
 	    					check3=true;
@@ -390,18 +400,20 @@ public class main {
 	    					System.out.print("Masukkan banyak titik (n) : ");
 	    					int n = userInput.nextInt(); //Memasukkan banyak titik
 	    					M.KeyboardInterpolasi(n);
-	    					System.out.print("Masukkan nilai yang akan ditaksir (x) ");
-	    					double x = userInput.nextDouble(); //Memasukkan nilai yang ingin ditaksir 
+	    					System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
+	    					
 	    				}
 	    				else if (pil_Masukan==2)
 	    				{
 	    					check3=true;
+	    					Scanner file = new Scanner(System.in);
+	    					Scanner taksir = new Scanner(System.in);
 	    					MATRIKS M = new MATRIKS();
 							System.out.print("Masukkan nama file eksternal (.txt): ");
-							namaFile = userInput.nextLine(); // Memasukkan nama file eksternal data uji
+							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 							M.BacaFileTitikInterpolasi(namaFile);
-							System.out.print("Masukkan nilai yang akan ditaksir (x) ");
-	    					double x = userInput.nextDouble(); //Memasukkan nilai yang ingin ditaksir 
+							System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
+	    					x = taksir.nextFloat(); //Memasukkan nilai yang ingin ditaksir 
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{

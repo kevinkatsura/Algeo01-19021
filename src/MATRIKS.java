@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class MATRIKS {
-    //atribut matriks
-    protected double[][] Tab = new double [100][100];
+	//atribut matriks
+	protected float[][] Tab = new float [100][100];
     protected int NBrsEff;
     protected int NKolEff;
     
@@ -19,8 +19,8 @@ public class MATRIKS {
     {
     	Scanner userInput = new Scanner(System.in);
     	
-    	double [][] A= new double[m][n];
-    	double [] B= new double[m];
+    	float [][] A= new float[m][n];
+    	float [] B= new float[m];
         
         this.NBrsEff = m;
         this.NKolEff = n+1;
@@ -32,7 +32,7 @@ public class MATRIKS {
             for(int j = 0; j<n; j++)
             {
                 System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
-                A[i][j]  = userInput.nextDouble();
+                A[i][j]  = userInput.nextFloat();
             }
         }
 
@@ -41,7 +41,7 @@ public class MATRIKS {
         for(int k = 0; k<m; k++)
         {
             System.out.print("B["+ (k+1) +"] = ");
-            B[k]  = userInput.nextDouble();
+            B[k]  = userInput.nextFloat();
         }
 
         //membentuk matriks augmented dari masukan yang ada
@@ -74,7 +74,7 @@ public class MATRIKS {
             for(int j = 0; j<this.NKolEff; j++)
             {
                 System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
-                this.Tab[i][j]  = userInput.nextDouble();
+                this.Tab[i][j]  = userInput.nextFloat();
             }
         }
         userInput.close();
@@ -85,7 +85,7 @@ public class MATRIKS {
     	Scanner userInput = new Scanner(System.in);
 	
     	//melakukan inisiasi array
-    	double [][] Titik= new double[n][2];
+    	float [][] Titik= new float[n][2];
     
     	//menerima masukan koordinat x dan y sebanyak n titik
     	System.out.println("Masukkan titik : ");
@@ -94,7 +94,7 @@ public class MATRIKS {
     		System.out.print("Titik ke-"+(i+1)+" = ");
     		for(int j = 0; j<=1; j++)
     		{	
-    			Titik[i][j]  = userInput.nextDouble();
+    			Titik[i][j]  = userInput.nextFloat();
     		}
     	}
     	
@@ -121,7 +121,7 @@ public class MATRIKS {
     {
     	try
     	{
-    		File fileSaya = new File("C:\\Users\\OMEN\\eclipse-workspace\\tubes\\bin\\tubes\\"+namafile);
+    		File fileSaya = new File(namafile);
     		Scanner bacaBaris = new Scanner (fileSaya);
     		
     		if(bacaBaris.hasNextLine())
@@ -145,7 +145,7 @@ public class MATRIKS {
     			
     			while (bacaBaris.hasNextDouble())
     			{
-    				this.Tab[baris][kolom] = bacaBaris.nextDouble();
+    				this.Tab[baris][kolom] = bacaBaris.nextFloat();
     				kolom += 1;
     				if (kolom == elemen)
     				{
@@ -162,7 +162,7 @@ public class MATRIKS {
     		{
     			System.out.println("File Kosong");
     		}
-    		bacaBaris.close();
+    
     	}
     	catch (FileNotFoundException e)
     	{
@@ -210,13 +210,13 @@ public class MATRIKS {
     	
     }
     
-    public double pangkat (double a, int b)
+    public float pangkat (float a, int b)
     {
     	//fungsi pangkat (mirip pow tapi untuk tipe float)
     	
     	//inisiasi variabel
-    	double hasil = 1;
-    	double temp = 0;
+    	float hasil = 1;
+    	float temp = 0;
 
     	//penanganan jika pangkat 0 akan menghasilkan nilai 1
     	if (b==0)
