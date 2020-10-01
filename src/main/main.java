@@ -1,6 +1,7 @@
 package tubes;
 
 import java.util.*;
+import tubes.operator;
 
 public class main {
   public static void main(String[] args) {
@@ -63,8 +64,13 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
-	    	    					
-	    	    					
+	    	
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
+	    	    					OP.SPLGauss(M);
+	    	    					M.TulisMatriks();
+	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -75,7 +81,12 @@ public class main {
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 									
-									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
+	    	    					OP.SPLGauss(M);
+	    	    					M.TulisMatriks();
+	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{
@@ -108,6 +119,13 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
+	    	    					
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
+	    	    					OP.SPLGaussJordan(M);
+	    	    					M.TulisMatriks();
+	    	    					OP.MenulisSolusiSPLGaussJordan(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -118,6 +136,12 @@ public class main {
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
 									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
+	    	    					OP.SPLGaussJordan(M);
+	    	    					M.TulisMatriks();
+	    	    					OP.MenulisSolusiSPLGaussJordan(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{
@@ -150,6 +174,10 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
+	    	    					
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					OP.SPLMatriksInvers(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -159,6 +187,10 @@ public class main {
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
+									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					OP.SPLMatriksInvers(M);
 									
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -192,6 +224,10 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
+	    	    					
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					OP.Cramer(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -201,6 +237,10 @@ public class main {
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
+									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					OP.Cramer(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{
@@ -257,6 +297,11 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardDetBalikan(n);
+	    	    					
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.print("Determinan dari matriks tersebut adalah ");
+	    	    					System.out.print(OP.DeterminanReduksiBaris(M));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -266,6 +311,11 @@ public class main {
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
+									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.print("Determinan dari matriks tersebut adalah ");
+	    	    					System.out.print(OP.DeterminanReduksiBaris(M));
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{
@@ -296,6 +346,11 @@ public class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardDetBalikan(n);
+	    	    					
+	    	    					operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.print("Determinan dari matriks tersebut adalah ");
+	    	    					System.out.print(OP.DeterminanKofaktor(M));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -305,6 +360,11 @@ public class main {
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 									M.BacaFileMatriks(namaFile);
+									
+									operator OP = new operator();
+	    	    					System.out.println("==============================================");
+	    	    					System.out.print("Determinan dari matriks tersebut adalah ");
+	    	    					System.out.print(OP.DeterminanKofaktor(M));
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{
@@ -346,6 +406,11 @@ public class main {
 	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    					M.KeyboardDetBalikan(n);
+	    					
+	    					operator OP = new operator();
+	    					System.out.println("==============================================");
+	    					System.out.println("Matriks balikan dari matriks di atas adalah ");
+	    					System.out.print(OP.MatriksInvers(M));
 	    				}
 	    				else if (pil_Masukan==2)
 	    				{
@@ -355,6 +420,11 @@ public class main {
 							System.out.print("Masukkan nama file eksternal (.txt): ");
 							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 							M.BacaFileMatriks(namaFile);
+							
+							operator OP = new operator();
+	    					System.out.println("==============================================");
+	    					System.out.println("Matriks balikan dari matriks di atas adalah ");
+	    					System.out.print(OP.MatriksInvers(M));
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{

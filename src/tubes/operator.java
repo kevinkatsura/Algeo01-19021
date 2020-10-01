@@ -6,7 +6,7 @@ import java.util.*;
 public class operator {
 
     
-    public void tukarBaris(tubes.MATRIKS M, int i, int j)
+    public void tukarBaris(MATRIKS M, int i, int j)
     {
         //tukar elemen baris i dengan baris j
         for (int k=0; k<M.NBrsEff; k++)
@@ -17,7 +17,7 @@ public class operator {
         }
     }
 
-    public float DeterminanKofaktor(tubes.MATRIKS M) {
+    public float DeterminanKofaktor(MATRIKS M) {
         float det = 0;
         if ((M.NBrsEff == 2) && (M.NKolEff == 2)){
             det =(M.Tab[0][0]*M.Tab[1][1]) - (M.Tab[0][1]*M.Tab[1][0]);
@@ -25,7 +25,7 @@ public class operator {
         }
         else{
             int i,j,k;
-            tubes.MATRIKS Mtemp = new tubes.MATRIKS();
+            MATRIKS Mtemp = new MATRIKS();
             Mtemp.NBrsEff = M.NBrsEff-1;
             Mtemp.NKolEff = M.NKolEff-1;
             for (k = 0; k < M.NKolEff; k++){
@@ -54,7 +54,7 @@ public class operator {
         }
     }
 
-    public float DeterminanReduksiBaris(tubes.MATRIKS M) {
+    public float DeterminanReduksiBaris(MATRIKS M) {
         for (int n = 0; n < M.NBrsEff-1 ; n++) {
             for (int i = n+1; i < M.NBrsEff; i++) {
                 float rep = M.Tab[i][n] ;
@@ -70,7 +70,7 @@ public class operator {
         return det ;
     }
   
-    public tubes.MATRIKS SPLGauss(tubes.MATRIKS M) {
+    public MATRIKS SPLGauss(MATRIKS M) {
         for (int i = 0; i < M.NBrsEff; i++) {
             boolean swapped = false ;
             int a = M.NBrsEff-1 ;
@@ -118,14 +118,14 @@ public class operator {
         return M;
     }
 
-    public void SwapByIndeksAwal(int i , int j , tubes.MATRIKS M) {
+    public void SwapByIndeksAwal(int i , int j , MATRIKS M) {
         if (IndeksAwalBaris(i,M) > IndeksAwalBaris(j,M)){
             tukarBaris(M,i,j);
         }
     }
 
-    public tubes.MATRIKS SPLGaussJordan(tubes.MATRIKS matriksinput) {
-        tubes.MATRIKS matriks = RemoveZeroRow(SPLGauss(matriksinput)) ;
+    public MATRIKS SPLGaussJordan(MATRIKS matriksinput) {
+        MATRIKS matriks = RemoveZeroRow(SPLGauss(matriksinput)) ;
             for (int i = matriks.NBrsEff - 1; i >= 1; i--) {
                 float rep1 = matriks.Tab[i][IndeksAwalBaris(i, matriks)];
                 for (int j = i - 1; j >= 0; j--) {
@@ -138,7 +138,7 @@ public class operator {
         return matriks ;
     }
 
-    public int IndeksAwalBaris(int i, tubes.MATRIKS M){
+    public int IndeksAwalBaris(int i, MATRIKS M){
         boolean indeksfound;
         int k = 0;
         indeksfound = (M.Tab[i][k] != 0);
@@ -154,8 +154,8 @@ public class operator {
         return k;
     }
 
-    public tubes.MATRIKS KaliMatriks(tubes.MATRIKS matriks1, tubes.MATRIKS matriks2) {
-        tubes.MATRIKS matriks = new tubes.MATRIKS();
+    public MATRIKS KaliMatriks(MATRIKS matriks1, MATRIKS matriks2) {
+        MATRIKS matriks = new MATRIKS();
         matriks.NBrsEff = matriks1.NBrsEff;
         matriks.NKolEff = matriks2.NKolEff;
         if (matriks1.NKolEff == matriks2.NBrsEff){
@@ -172,11 +172,11 @@ public class operator {
         return matriks ;
     }
 
-    public void SPLMatriksInvers (tubes.MATRIKS M) {
-        tubes.MATRIKS B = new tubes.MATRIKS();
+    public void SPLMatriksInvers (MATRIKS M) {
+        MATRIKS B = new MATRIKS();
         B.NBrsEff = M.NBrsEff ;
         B.NKolEff = 1 ;
-        tubes.MATRIKS A = new tubes.MATRIKS();
+        MATRIKS A = new MATRIKS();
         A.NBrsEff = M.NBrsEff ;
         A.NKolEff = M.NKolEff-1 ;
         for (int i = 0; i < M.NBrsEff; i++) {
@@ -188,13 +188,13 @@ public class operator {
             }
         }
         if (M.NBrsEff == M.NKolEff-1 && (DeterminanKofaktor(A)!= 0)){
-            tubes.MATRIKS NewMatrix = new tubes.MATRIKS();
+            MATRIKS NewMatrix = new MATRIKS();
             NewMatrix.NBrsEff = A.NBrsEff;
             NewMatrix.NKolEff = A.NKolEff;
             NewMatrix = MatriksInvers(A) ;
             
             System.out.println(Arrays.deepToString(NewMatrix.Tab));
-            tubes.MATRIKS NewestMatrix = new tubes.MATRIKS();
+            MATRIKS NewestMatrix = new MATRIKS();
             NewestMatrix.NBrsEff = A.NBrsEff;
             NewestMatrix.NKolEff = A.NKolEff;
             NewestMatrix = KaliMatriks(NewMatrix,B) ;
@@ -222,11 +222,11 @@ public class operator {
         }
     }
 
-    public boolean IsLastRowZero(int i, tubes.MATRIKS M){
+    public boolean IsLastRowZero(int i, MATRIKS M){
         return (M.Tab[i][M.NKolEff-1] == 0);
     }
 
-    public boolean IsNoSolution(tubes.MATRIKS matriks) {
+    public boolean IsNoSolution(MATRIKS matriks) {
         int i = matriks.NBrsEff-1 ;
         boolean found = (IndeksAwalBaris(i, matriks) == matriks.NKolEff-1 && matriks.Tab[i][IndeksAwalBaris(i,matriks)] != 0) ;
         while(i >= 0 && !found){
@@ -240,7 +240,7 @@ public class operator {
         return found ;
     }
 
-    public tubes.MATRIKS RemoveZeroRow(tubes.MATRIKS M) {
+    public MATRIKS RemoveZeroRow(MATRIKS M) {
         int count = 0 ;
         for (int i = 0; i < M.NBrsEff; i++) {
             if (IndeksAwalBaris(i,M) == M.NKolEff-1 && (M.Tab[i][IndeksAwalBaris(i,M)] == 0) ){
@@ -248,7 +248,7 @@ public class operator {
             }
         }
         int Brs = M.NBrsEff-count ;
-        tubes.MATRIKS NewMatrix = new tubes.MATRIKS();
+        MATRIKS NewMatrix = new MATRIKS();
         NewMatrix.NBrsEff = Brs;
         NewMatrix.NKolEff = M.NKolEff;
         for (int j = 0; j < Brs; j++) {
@@ -259,7 +259,7 @@ public class operator {
         return NewMatrix;
     }
 
-    public boolean IsAllDiagonalOne(tubes.MATRIKS matriks) {
+    public boolean IsAllDiagonalOne(MATRIKS matriks) {
         int a = 0 ;
         boolean IsAllOne ;
         do {
@@ -274,8 +274,8 @@ public class operator {
         return IsAllOne ;
     }
 
-    public tubes.MATRIKS CopyMatriksDenganJumlahBaris(int i, tubes.MATRIKS matriks) {
-        tubes.MATRIKS NewMatrix = new tubes.MATRIKS();
+    public MATRIKS CopyMatriksDenganJumlahBaris(int i, MATRIKS matriks) {
+        MATRIKS NewMatrix = new MATRIKS();
         NewMatrix.NBrsEff = i;
         NewMatrix.NKolEff = matriks.NBrsEff ;
         for (int j = 0; j < i; j++) {
@@ -286,7 +286,7 @@ public class operator {
         return NewMatrix ;
     }
 
-    public void TulisSolusiBanyakSPL(tubes.MATRIKS matriks) {
+    public void TulisSolusiBanyakSPL(MATRIKS matriks) {
         System.out.println();
         System.out.println("Matriks Memiliki Solusi Banyak");
         System.out.println("Solusi Matriks Antara Lain : ");
@@ -304,7 +304,7 @@ public class operator {
         }
     }
 
-    public float[] SubsitusiMundur(tubes.MATRIKS matriks) {
+    public float[] SubsitusiMundur(MATRIKS matriks) {
         float [] temp = new float[matriks.NKolEff-2] ;
         for (int i = matriks.NBrsEff - 1; i >= 1; i--) {
             float rep1 = matriks.Tab[i][IndeksAwalBaris(i, matriks)];
@@ -322,8 +322,8 @@ public class operator {
         return temp;
     }
 
-    public void MenulisSolusiSPL(tubes.MATRIKS matriks) {
-        tubes.MATRIKS NewMatrix = new tubes.MATRIKS() ;
+    public void MenulisSolusiSPL(MATRIKS matriks) {
+        MATRIKS NewMatrix = new MATRIKS() ;
         NewMatrix.NKolEff = matriks.NKolEff ;
         NewMatrix.NBrsEff = matriks.NBrsEff;
         NewMatrix = RemoveZeroRow(matriks);
