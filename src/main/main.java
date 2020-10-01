@@ -52,9 +52,13 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    					float[][]matriks = operator.inputSPL();
-	    	    					float[][] matrix = operator.SPLGauss(matriks);
-	    	    					operator.MenulisSolusiSPLGauss(matrix);
+	    	    					float[][] matriks = operator.keyboardSPL();
+									System.out.println();
+									System.out.println("Matriks Hasil Metode Gauss :");
+									System.out.println();
+	    	    					operator.TulisMatriks(operator.SPLGauss(matriks));
+									System.out.println("Solusi SPL");
+	    	    					operator.MenulisSolusiSPL(operator.SPLGauss(matriks));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -79,7 +83,15 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    				}
+									float[][] matriks = operator.keyboardSPL();
+									float[][] matrix = operator.SPLGaussJordan(matriks) ;
+									System.out.println();
+									System.out.println("Matriks Hasil Metode Gauss Jordan :");
+									System.out.println();
+									operator.TulisMatriks(matrix);
+									System.out.println("Solusi SPL");
+									operator.MenulisSolusiSPL(matrix);
+								}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
 	    	    					check3=true;
@@ -103,6 +115,8 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
+									float[][] matriks = operator.keyboardSPL();
+									operator.SPLMatriksInvers(matriks);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -171,8 +185,6 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-	    	    					float[][] matriks = operator.inputDet() ;
-									System.out.println(operator.DeterminanReduksiBaris(matriks));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -197,8 +209,6 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-									float[][] matriks = operator.inputDet() ;
-									System.out.println(operator.DeterminanKofaktor(matriks));
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
