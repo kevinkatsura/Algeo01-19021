@@ -8,74 +8,78 @@ import java.util.Scanner;
 
 public class operator {
 
-    public static void tukarBaris(float[][] Matriks, int i, int j)
+    
+    public void tukarBaris(MATRIKS M, int i, int j)
     {
         //tukar elemen baris i dengan baris j
-        int N = Matriks[i].length-1;
-        for (int k=0; k<=N; k++)
+        for (int k=0; k<M.NBrsEff; k++)
         {
-            float Temp = Matriks[i][k];
-            Matriks[i][k] = Matriks[j][k];
-            Matriks[j][k] = Temp;
+            float Temp = M.Tab[i][k];
+            M.Tab[i][k] = M.Tab[j][k];
+            M.Tab[j][k] = Temp;
         }
     }
 
-    public static float DeterminanKofaktor(float[][] matriks ) {
+    public float DeterminanKofaktor(MATRIKS M) {
         float det = 0;
-        if ((matriks.length == 2) && (matriks[0].length == 2)){
-            det =(matriks[0][0]*matriks[1][1]) - (matriks[0][1]*matriks[1][0]);
+        if ((M.NBrsEff == 2) && (M.NKolEff == 2)){
+            det =(M.Tab[0][0]*M.Tab[1][1]) - (M.Tab[0][1]*M.Tab[1][0]);
             return det;
         }
         else{
             int i,j,k;
-            float[][] Mtemp = new float[(matriks.length)-1][(matriks[0].length)-1];
-            for (k = 0; k < matriks[0].length; k++){
-                for (i=1; i < matriks.length; i++){
-                    for(j=0; j < matriks[0].length; j++){
+            MATRIKS Mtemp = new MATRIKS ();
+            Mtemp.NBrsEff = M.NBrsEff-1;
+            Mtemp.NKolEff = M.NKolEff-1;
+            for (k = 0; k < M.NKolEff; k++){
+                for (i=1; i < M.NBrsEff; i++){
+                    for(j=0; j < M.NKolEff; j++){
                         if (j>k){
-                            Mtemp[i-1][j-1] = matriks[i][j];
+                            Mtemp.Tab[i-1][j-1] = M.Tab[i][j];
                         }
                         else{
                             if (j==k){continue;}
                             else {
-                                Mtemp[i - 1][j] = matriks[i][j];
+                            	Mtemp.Tab[i - 1][j] = M.Tab[i][j];
                             }
                         }
                     }
                 }
                 if (k%2 == 0){
-                    det += matriks[0][k]*DeterminanKofaktor(Mtemp);
+                    det += M.Tab[0][k]*DeterminanKofaktor(Mtemp);
                 }
                 else{
-                    det -= matriks[0][k]*DeterminanKofaktor(Mtemp);
+                    det -= M.Tab[0][k]*DeterminanKofaktor(Mtemp);
                 }
             }
             return det;
 
         }
     }
-    public static float DeterminanReduksiBaris(float[][] matriks) {
-        for (int n = 0; n < matriks.length-1 ; n++) {
-            for (int i = n+1; i < matriks.length; i++) {
-                float rep = matriks[i][n] ;
-                for (int k = n; k < matriks[0].length; k++) {
-                    matriks[i][k] = matriks[i][k] - ((matriks[n][k] * rep) / matriks[n][n]);
+    
+    public float DeterminanReduksiBaris(MATRIKS M) {
+        for (int n = 0; n < M.NBrsEff-1 ; n++) {
+            for (int i = n+1; i < M.NBrsEff; i++) {
+                float rep = M.Tab[i][n] ;
+                for (int k = n; k < M.NKolEff; k++) {
+                	M.Tab[i][k] = M.Tab[i][k] - ((M.Tab[n][k] * rep) / M.Tab[n][n]);
                 }
             }
         }
         float det = 1 ;
-        for (int i = 0; i < matriks.length; i++) {
-            det *= matriks[i][i] ;
+        for (int i = 0; i < M.NBrsEff; i++) {
+            det *= M.Tab[i][i] ;
         }
         return det ;
     }
-    public static float[][] SPLGauss(float[][] matriks) {
-        for (int i = 0; i < matriks.length; i++) {
+    
+    public MATRIKS SPLGauss(MATRIKS M) {
+        for (int i = 0; i < M.NBrsEff; i++) {
             boolean swapped = false ;
-            int a = matriks.length-1 ;
+            int a = M.NBrsEff-1 ;
             while(!swapped && a > i ){
-                if (IndeksAwalBaris(i,matriks) > IndeksAwalBaris(a,matriks)) {
-                    tukarBaris(matriks,i,a);
+                if (IndeksAwalBaris(i,M) > IndeksAwalBaris(a,M)) {
+                    tukarBaris(M,i,a);
                     swapped = true;
                 }
                 else{
@@ -83,21 +87,21 @@ public class operator {
                 }
             }
         }
-        for (int n = 0; n < matriks.length ; n++) {
-            for (int i = n + 1; i < matriks.length; i++) {
-                float rep = matriks[i][IndeksAwalBaris(i,matriks)];
-                if (matriks[i][IndeksAwalBaris(n,matriks)] != 0) {
-                    for (int k = IndeksAwalBaris(i, matriks); k < matriks[0].length; k++) {
-                        matriks[i][k] = matriks[i][k] - ((matriks[n][k] * rep) / matriks[n][IndeksAwalBaris(n, matriks)]);
+        for (int n = 0; n < M.NBrsEff ; n++) {
+            for (int i = n + 1; i < M.NBrsEff; i++) {
+                float rep = M.Tab[i][IndeksAwalBaris(i,M)];
+                if (M.Tab[i][IndeksAwalBaris(n,M)] != 0) {
+                    for (int k = IndeksAwalBaris(i, M); k < M.NKolEff; k++) {
+                        M.Tab[i][k] = M.Tab[i][k] - ((M.Tab[n][k] * rep) / M.Tab[n][IndeksAwalBaris(n, M)]);
                     }
                 }
             }
-            for (int i = n + 1; i < matriks.length; i++) {
+            for (int i = n + 1; i < M.NBrsEff; i++) {
                 boolean swapped = false ;
-                int a = matriks.length-1 ;
+                int a = M.NBrsEff-1 ;
                 while(!swapped && a > i ){
-                    if (IndeksAwalBaris(i,matriks) > IndeksAwalBaris(a,matriks)) {
-                        tukarBaris(matriks,i,a);
+                    if (IndeksAwalBaris(i,M) > IndeksAwalBaris(a,M)) {
+                        tukarBaris(M,i,a);
                         swapped = true;
                     }
                     else{
@@ -106,43 +110,43 @@ public class operator {
                 }
             }
         }
-        for (int l = 0; l < matriks.length; l++) {
-            float rep = matriks[l][IndeksAwalBaris(l,matriks)];
-            for (int m = IndeksAwalBaris(l,matriks); m < matriks[l].length; m++) {
+        for (int l = 0; l < M.NBrsEff; l++) {
+            float rep = M.Tab[l][IndeksAwalBaris(l,M)];
+            for (int m = IndeksAwalBaris(l,M); m < M.NKolEff; m++) {
                 if (rep != 0) {
-                    matriks[l][m] = matriks[l][m] / rep;
+                    M.Tab[l][m] = M.Tab[l][m] / rep;
                 }
             }
         }
-        return matriks ;
+        return M;
     }
 
-    public static void SwapByIndeksAwal(int i , int j , float[][] matriks) {
-        if (IndeksAwalBaris(i,matriks) > IndeksAwalBaris(j,matriks)){
-            tukarBaris(matriks,i,j);
+    public void SwapByIndeksAwal(int i , int j , MATRIKS M) {
+        if (IndeksAwalBaris(i,M) > IndeksAwalBaris(j,M)){
+            tukarBaris(M,i,j);
         }
     }
 
-    public static float[][] SPLGaussJordan(float[][] matriksinput) {
-        float[][] matriks = RemoveZeroRow(SPLGauss(matriksinput)) ;
-            for (int i = matriks.length - 1; i >= 1; i--) {
-                float rep1 = matriks[i][IndeksAwalBaris(i, matriks)];
+    public MATRIKS SPLGaussJordan(MATRIKS matriksinput) {
+        MATRIKS matriks = RemoveZeroRow(SPLGauss(matriksinput)) ;
+            for (int i = matriks.NBrsEff - 1; i >= 1; i--) {
+                float rep1 = matriks.Tab[i][IndeksAwalBaris(i, matriks)];
                 for (int j = i - 1; j >= 0; j--) {
-                    float rep2 = matriks[j][IndeksAwalBaris(i,matriks)];
-                    for (int k = IndeksAwalBaris(i,matriks); k < matriks[j].length; k++) {
-                        matriks[j][k] = matriks[j][k] - (matriks[i][k] / rep1) * rep2;
+                    float rep2 = matriks.Tab[j][IndeksAwalBaris(i,matriks)];
+                    for (int k = IndeksAwalBaris(i,matriks); k < matriks.NKolEff; k++) {
+                        matriks.Tab[j][k] = matriks.Tab[j][k] - (matriks.Tab[i][k] / rep1) * rep2;
                     }
                 }
             }
         return matriks ;
     }
 
-    public static int IndeksAwalBaris(int i, float[][] matriks){
+    public int IndeksAwalBaris(int i, MATRIKS M){
         boolean indeksfound;
         int k = 0;
-        indeksfound = (matriks[i][k] != 0);
-        while (!indeksfound && k < matriks[i].length-1) {
-            if (matriks[i][k] != 0)
+        indeksfound = (M.Tab[i][k] != 0);
+        while (!indeksfound && k < M.NKolEff-1) {
+            if (M.Tab[i][k] != 0)
             {
                 indeksfound = true;
             }
@@ -154,42 +158,57 @@ public class operator {
     }
 
 
-    public static float[][] KaliMatriks(float[][] matriks1, float[][] matriks2) {
-        float [][] matriks = new float[matriks1.length][matriks2[0].length] ;
-        if (matriks1[0].length == matriks2.length){
-            for (int i = 0; i < matriks1.length; i++) {
-                for (int j = 0; j < matriks2[0].length ; j++) {
+    public MATRIKS KaliMatriks(MATRIKS matriks1, MATRIKS matriks2) {
+        MATRIKS matriks = new MATRIKS();
+        matriks.NBrsEff = matriks1.NBrsEff;
+        matriks.NKolEff = matriks2.NKolEff;
+        if (matriks1.NKolEff == matriks2.NBrsEff){
+            for (int i = 0; i < matriks1.NBrsEff; i++) {
+                for (int j = 0; j < matriks2.NKolEff ; j++) {
                     int sum = 0 ;
-                    for (int k = 0; k < matriks2.length ; k++) {
-                        sum += matriks1[i][k]*matriks2[k][j] ;
+                    for (int k = 0; k < matriks2.NBrsEff ; k++) {
+                        sum += matriks1.Tab[i][k]*matriks2.Tab[k][j] ;
                     }
-                    matriks[i][j] = sum ;
+                    matriks.Tab[i][j] = sum ;
                 }
             }
         }
         return matriks ;
     }
 
-    public static void SPLMatriksInvers (float[][] matriks) {
-        float [][] B = new float[matriks.length][1] ;
-        float [][] A = new float[matriks.length][matriks[0].length-1] ;
-        for (int i = 0; i < matriks.length; i++) {
-            B[i][0] = matriks[i][matriks[i].length-1] ;
+    public void SPLMatriksInvers (MATRIKS M) {
+        MATRIKS B = new MATRIKS();
+        B.NBrsEff = M.NBrsEff ;
+        B.NKolEff = 1 ;
+        MATRIKS A = new MATRIKS();
+        A.NBrsEff = M.NBrsEff ;
+        A.NKolEff = M.NKolEff-1 ;
+        for (int i = 0; i < M.NBrsEff; i++) {
+            B.Tab[i][0] = M.Tab[i][M.NKolEff-1] ;
         }
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A[i][j] = matriks[i][j] ;
+        for (int i = 0; i < A.NBrsEff; i++) {
+            for (int j = 0; j < A.NKolEff; j++) {
+                A.Tab[i][j] = M.Tab[i][j] ;
             }
         }
-        if (matriks.length == matriks[0].length-1 && (DeterminanKofaktor(A)!= 0)){
-            float[][] NewMatrix = MatriksInvers(A) ;
-            System.out.println(Arrays.deepToString(NewMatrix));
-            float [][] NewestMatrix = KaliMatriks(NewMatrix,B) ;
+        if (M.NBrsEff == M.NKolEff-1 && (DeterminanKofaktor(A)!= 0)){
+            MATRIKS NewMatrix = new MATRIKS();
+            NewMatrix.NBrsEff = A.NBrsEff;
+            NewMatrix.NKolEff = A.NKolEff;
+            NewMatrix = MatriksInvers(A) ;
+            
+            System.out.println(Arrays.deepToString(NewMatrix.Tab));
+            MATRIKS NewestMatrix = new MATRIKS();
+            NewestMatrix.NBrsEff = A.NBrsEff;
+            NewestMatrix.NKolEff = A.NKolEff;
+            NewestMatrix = KaliMatriks(NewMatrix,B) ;
+            
+            
             System.out.println("");
             System.out.println("Matriks memiliki Solusi");
             System.out.println("Solusi dari SPL tersebut Antara Lain : ");
-            for (int i = 0; i < NewestMatrix.length; i++) {
-                System.out.printf("X%d = %.2f",i+1,NewestMatrix[i][0]);
+            for (int i = 0; i < NewestMatrix.NBrsEff; i++) {
+                System.out.printf("X%d = %.2f",i+1,NewestMatrix.Tab[i][0]);
                 System.out.println();
             }
         }
@@ -207,15 +226,15 @@ public class operator {
         }
     }
 
-    public static boolean IsLastRowZero(int i, float[][] matriks ){
-        return (matriks[i][matriks[i].length-1] == 0);
+    public boolean IsLastRowZero(int i, MATRIKS M){
+        return (M.Tab[i][M.NKolEff-1] == 0);
     }
 
-    public static boolean IsNoSolution(float[][] matriks) {
-        int i = matriks.length-1 ;
-        boolean found = (IndeksAwalBaris(i, matriks) == matriks[i].length-1 && matriks[i][IndeksAwalBaris(i,matriks)] != 0) ;
+    public boolean IsNoSolution(MATRIKS matriks) {
+        int i = matriks.NBrsEff-1 ;
+        boolean found = (IndeksAwalBaris(i, matriks) == matriks.NKolEff-1 && matriks.Tab[i][IndeksAwalBaris(i,matriks)] != 0) ;
         while(i >= 0 && !found){
-            if (IndeksAwalBaris(i, matriks) == matriks[i].length-1 && matriks[i][IndeksAwalBaris(i,matriks)] != 0){
+            if (IndeksAwalBaris(i, matriks) == matriks.NKolEff-1 && matriks.Tab[i][IndeksAwalBaris(i,matriks)] != 0){
                 found = true ;
             }
             else{
@@ -225,24 +244,26 @@ public class operator {
         return found ;
     }
 
-    public static float[][] RemoveZeroRow(float[][] matriks) {
+    public MATRIKS RemoveZeroRow(MATRIKS M) {
         int count = 0 ;
-        for (int i = 0; i < matriks.length; i++) {
-            if (IndeksAwalBaris(i,matriks) == matriks[i].length-1 && (matriks[i][IndeksAwalBaris(i,matriks)] == 0) ){
+        for (int i = 0; i < M.NBrsEff; i++) {
+            if (IndeksAwalBaris(i,M) == M.NKolEff-1 && (M.Tab[i][IndeksAwalBaris(i,M)] == 0) ){
                 count++ ;
             }
         }
-        int Brs = matriks.length-count ;
-        float[][] NewMatrix = new float[Brs][matriks[0].length] ;
+        int Brs = M.NBrsEff-count ;
+        MATRIKS NewMatrix = new MATRIKS ();
+        NewMatrix.NBrsEff = Brs;
+        NewMatrix.NKolEff = M.NKolEff;
         for (int j = 0; j < Brs; j++) {
-            for (int k = 0; k < matriks[j].length ; k++) {
-                NewMatrix[j][k] = matriks[j][k] ;
+            for (int k = 0; k < M.NKolEff ; k++) {
+                NewMatrix.Tab[j][k] = M.Tab[j][k] ;
             }
         }
         return NewMatrix;
     }
 
-    public static boolean IsAllDiagonalOne(float[][] matriks) {
+    public boolean IsAllDiagonalOne(float[][] matriks) {
         int a = 0 ;
         boolean IsAllOne ;
         do {
@@ -257,11 +278,13 @@ public class operator {
         return IsAllOne ;
     }
 
-    public static float[][] CopyMatriksDenganJumlahBaris(int i, float[][]matriks) {
-        float [][] NewMatrix = new float[i][matriks.length] ;
+    public MATRIKS CopyMatriksDenganJumlahBaris(int i, MATRIKS matriks) {
+        MATRIKS NewMatrix = new MATRIKS ();
+        NewMatrix.NBrsEff = i;
+        NewMatrix.NKolEff = matriks.NBrsEff ;
         for (int j = 0; j < i; j++) {
-            for (int k = 0; k < matriks[j].length ; k++) {
-                NewMatrix[j][k] = matriks[j][k] ;
+            for (int k = 0; k < matriks.NKolEff ; k++) {
+                NewMatrix.Tab[j][k] = matriks.Tab[j][k] ;
             }
         }
         return NewMatrix ;
