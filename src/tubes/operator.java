@@ -352,7 +352,7 @@ public class operator {
         }
     }
 
-    public static float [] Cramer(float matriks [][])
+    public static void Cramer(float matriks [][])
     {
         /* I.S : persamaan dengan n peubah n persamaan
                  input berupa matriks augmented */
@@ -375,22 +375,31 @@ public class operator {
         }
         // mencari determinan matriks
         float detA = DeterminanKofaktor(A);
-        // mencari determinan peubah (Dx, Dy, dst..)
-        for (k =0; k<m; k++){
-            // mengembalikan  matriks A
-            for (i=0; i<m; i++){
-                for (j=0; j<m; j++){
-                    A[i][j] = matriks[i][j];
+        // mengecek jika matriks tidak memiliki determinan
+        if (detA == 0){
+            System.out.println("Matriks tidak memiliki determinan (determinan = 0)");
+        }
+        else{
+            // mencari determinan peubah (Dx, Dy, dst..)
+            for (k =0; k<m; k++){
+                // mengembalikan  matriks A
+                for (i=0; i<m; i++){
+                    for (j=0; j<m; j++){
+                        A[i][j] = matriks[i][j];
+                    }
                 }
+                for (i=0; i<m; i++){
+                    A[i][k] = B[i];
+                }
+                float Dx = DeterminanKofaktor(A);
+                res[k] = Dx/detA;
             }
-            for (i=0; i<m; i++){
-                A[i][k] = B[i];
+            for( i=0; i<m; i++){
+                System.out.println("X"+(i+1)+"= "+res[i]);
             }
-            float Dx = DeterminanKofaktor(A);
-            res[k] = Dx/detA;
+
         }
 
-        return res;
     }
     public static float [][] Transpose ( float[][] Matriks)
     {
