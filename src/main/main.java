@@ -116,6 +116,7 @@ public class main {
 	    	    				{
 	    	    					check3=true;
 									float[][] matriks = operator.keyboardSPL();
+									System.out.println();
 									operator.SPLMatriksInvers(matriks);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
@@ -185,6 +186,11 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
+									float[][] matriks = operator.keyboardDetBalikan();
+									System.out.println();
+									System.out.println("Mencari nilai Determinan dengan Metode Reduksi Baris");
+									System.out.printf("Determinan : %f",operator.DeterminanReduksiBaris(matriks));
+									System.out.println();
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -209,6 +215,11 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
+									float[][] matriks = operator.keyboardDetBalikan();
+									System.out.println();
+									System.out.println("Mencari nilai Determinan dengan Metode Kofaktor");
+									System.out.printf("Determinan : %f",operator.DeterminanKofaktor(matriks));
+									System.out.println();
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{

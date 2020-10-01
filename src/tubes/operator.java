@@ -260,6 +260,7 @@ public class operator {
 
         }
     }
+
     public static float DeterminanReduksiBaris(float[][] matriks) {
         for (int n = 0; n < matriks.length-1 ; n++) {
             for (int i = n+1; i < matriks.length; i++) {
@@ -275,6 +276,7 @@ public class operator {
         }
         return det ;
     }
+
     public static float[][] SPLGauss(float[][] matriks) {
         for (int i = 0; i < matriks.length; i++) {
             boolean swapped = false ;
@@ -393,7 +395,7 @@ public class operator {
             float [][] NewestMatrix = KaliMatriks(NewMatrix,B) ;
             System.out.println("");
             System.out.println("Matriks memiliki Solusi");
-            System.out.println("Solusi dari SPL tersebut Antara Lain : ");
+            System.out.println("Solusi dari SPL Antara Lain : ");
             for (int i = 0; i < NewestMatrix.length; i++) {
                 System.out.printf("X%d = %.2f",i+1,NewestMatrix[i][0]);
                 System.out.println();
@@ -598,6 +600,7 @@ public class operator {
 
         return res;
     }
+
     public static float [][] Transpose ( float[][] Matriks)
     {
         int i,j;
