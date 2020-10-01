@@ -51,45 +51,45 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
 	    	    					
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak persamaan (m) : ");
-	    	    						int m = userInput.nextInt(); //Memasukkan banyak persamaan 
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardSPL(m, n);
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak persamaan (m) : ");
+	    	    					int m = userInput.nextInt(); //Memasukkan banyak persamaan 
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardSPL(m, n);
 	    	    					
 	    	    					
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
+									M.BacaFileMatriks(namaFile);
 									
 									
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode1==2)
@@ -97,41 +97,41 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak persamaan (m) : ");
-	    	    						int m = userInput.nextInt(); //Memasukkan banyak persamaan 
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardSPL(m, n);
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak persamaan (m) : ");
+	    	    					int m = userInput.nextInt(); //Memasukkan banyak persamaan 
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardSPL(m, n);
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
+									M.BacaFileMatriks(namaFile);
 									
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode1==3)
@@ -139,41 +139,41 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak persamaan (m) : ");
-	    	    						int m = userInput.nextInt(); //Memasukkan banyak persamaan 
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardSPL(m, n);
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak persamaan (m) : ");
+	    	    					int m = userInput.nextInt(); //Memasukkan banyak persamaan 
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardSPL(m, n);
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
+									M.BacaFileMatriks(namaFile);
 									
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}	
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode1==4)
@@ -181,40 +181,40 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak persamaan (m) : ");
-	    	    						int m = userInput.nextInt(); //Memasukkan banyak persamaan 
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardSPL(m, n);
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak persamaan (m) : ");
+	    	    					int m = userInput.nextInt(); //Memasukkan banyak persamaan 
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardSPL(m, n);
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+									M.BacaFileMatriks(namaFile);
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode1==5)
@@ -248,38 +248,38 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardDetBalikan(n);
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardDetBalikan(n);
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+									M.BacaFileMatriks(namaFile);
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode2==2)
@@ -287,38 +287,38 @@ public class main {
 	    					check2=true;
 	    					System.out.println("==============================================");
 	    					System.out.println("1. Menerima masukan keyboard");
-	    	    				System.out.println("2. Menerima masukan dari file");
-	    	    				System.out.println("3. Keluar");
+	    	    			System.out.println("2. Menerima masukan dari file");
+	    	    			System.out.println("3. Keluar");
 	    					while(!check3)
 	    					{
 	    						System.out.print("Masukkan pilihan : ");
-	    	    					pil_Masukan = userInput.nextInt();
-	    	    					if(pil_Masukan==1)
-	    	    					{
-	    	    						check3=true;
-	    	    						MATRIKS M = new MATRIKS();
-	    	    						System.out.print("Masukkan banyak peubah (n) : ");
-	    	    						int n = userInput.nextInt(); //Memasukkan banyak peubah
-	    	    						M.KeyboardDetBalikan(n);
-	    	    					}
-	    	    					else if (pil_Masukan==2)
-	    	    					{
-	    	    						check3=true;
-	    	    						Scanner file = new Scanner(System.in);
-	    	    						MATRIKS M = new MATRIKS();
+	    	    				pil_Masukan = userInput.nextInt();
+	    	    				if(pil_Masukan==1)
+	    	    				{
+	    	    					check3=true;
+	    	    					MATRIKS M = new MATRIKS();
+	    	    					System.out.print("Masukkan banyak peubah (n) : ");
+	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
+	    	    					M.KeyboardDetBalikan(n);
+	    	    				}
+	    	    				else if (pil_Masukan==2)
+	    	    				{
+	    	    					check3=true;
+	    	    					Scanner file = new Scanner(System.in);
+	    	    					MATRIKS M = new MATRIKS();
 	    							System.out.print("Masukkan nama file eksternal (.txt): ");
 	    							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-								M.BacaFileMatriks(namaFile);
-	    	    					}
-	    	    					else if (pil_Masukan==3)
-	    	    					{
-	    	    						break;
-	    	    					}
-	    	    					else 
-	    	    					{
-	    	    						System.out.println("Pilihan tidak tersedia");
-	    	    	    					check3 = false;
-	    	    					}
+									M.BacaFileMatriks(namaFile);
+	    	    				}
+	    	    				else if (pil_Masukan==3)
+	    	    				{
+	    	    					break;
+	    	    				}
+	    	    				else 
+	    	    				{
+	    	    					System.out.println("Pilihan tidak tersedia");
+	    	    	    			check3 = false;
+	    	    				}
 	    					}
 	    				}
 	    				else if (pil_Metode2==2)
@@ -335,13 +335,13 @@ public class main {
 	    		else if (pil_Operasi==3)
 	    		{
 	    			check1=true;
-				System.out.println("==============================================");
-				System.out.println("1. Menerima masukan keyboard");
+					System.out.println("==============================================");
+					System.out.println("1. Menerima masukan keyboard");
 	    			System.out.println("2. Menerima masukan dari file");
 	    			System.out.println("3. Keluar");
-				while(!check3)
-				{
-					System.out.print("Masukkan pilihan : ");
+					while(!check3)
+					{
+						System.out.print("Masukkan pilihan : ");
 	    				pil_Masukan = userInput.nextInt();
 	    				if(pil_Masukan==1)
 	    				{
@@ -356,33 +356,33 @@ public class main {
 	    					check3=true;
 	    					Scanner file = new Scanner(System.in);
 	    					MATRIKS M = new MATRIKS();
-						System.out.print("Masukkan nama file eksternal (.txt): ");
-						namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-						M.BacaFileMatriks(namaFile);
+							System.out.print("Masukkan nama file eksternal (.txt): ");
+							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
+							M.BacaFileMatriks(namaFile);
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{
 	    					break;
 	    				}
-	 				else 
-	   				{
+	    				else 
+	    				{
 	    					System.out.println("Pilihan tidak tersedia");
-	    	    				check3 = false;
+	    	    			check3 = false;
 	    				}
-				}
+					}
 	    		}
 	    		else if (pil_Operasi==4)
 	    		{
 	    			check1=true;
-				System.out.println("==============================================");
-				System.out.println("1. Menerima masukan keyboard");
+					System.out.println("==============================================");
+					System.out.println("1. Menerima masukan keyboard");
 	    			System.out.println("2. Menerima masukan dari file");
 	    			System.out.println("3. Keluar");
-				while(!check3)
-				{
-					System.out.print("Masukkan pilihan : ");
+					while(!check3)
+					{
+						System.out.print("Masukkan pilihan : ");
 	    				pil_Masukan = userInput.nextInt();
-	    				double x;
+	    				float x;
 	    				if(pil_Masukan==1)
 	    				{
 	    					check3=true;
@@ -399,11 +399,11 @@ public class main {
 	    					Scanner file = new Scanner(System.in);
 	    					Scanner taksir = new Scanner(System.in);
 	    					MATRIKS M = new MATRIKS();
-						System.out.print("Masukkan nama file eksternal (.txt): ");
-						namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
-						M.BacaFileTitikInterpolasi(namaFile);
-						System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
-	    					x = taksir.nextDouble(); //Memasukkan nilai yang ingin ditaksir 
+							System.out.print("Masukkan nama file eksternal (.txt): ");
+							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
+							M.BacaFileTitikInterpolasi(namaFile);
+							System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
+	    					x = taksir.nextFloat(); //Memasukkan nilai yang ingin ditaksir 
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{
@@ -412,20 +412,20 @@ public class main {
 	    				else 
 	    				{
 	    					System.out.println("Pilihan tidak tersedia");
-	    	    				check3 = false;
+	    	    			check3 = false;
 	    				}
-				}
+					}
 	    		}
 	    		else if (pil_Operasi==5)
 	    		{
 	    			check1=true;
-				System.out.println("==============================================");
-				System.out.println("1. Menerima masukan keyboard");
+					System.out.println("==============================================");
+					System.out.println("1. Menerima masukan keyboard");
 	    			System.out.println("2. Menerima masukan dari file");
 	    			System.out.println("3. Keluar");
-				while(!check3)
-				{
-					System.out.print("Masukkan pilihan : ");
+					while(!check3)
+					{
+						System.out.print("Masukkan pilihan : ");
 	    				pil_Masukan = userInput.nextInt();
 	    				if(pil_Masukan==1)
 	    				{
@@ -444,7 +444,7 @@ public class main {
 	    					System.out.println("Pilihan tidak tersedia");
 	    	    			check3 = false;
 	    				}
-				}
+					}
 	    		}
 	    		else if (pil_Operasi==6)
 	    		{
