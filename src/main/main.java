@@ -144,18 +144,13 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-<<<<<<< HEAD
-									float[][] matriks = operator.keyboardSPL();
-									System.out.println();
-									operator.SPLMatriksInvers(matriks);
-=======
 	    	    					MATRIKS M = new MATRIKS();
 	    	    					System.out.print("Masukkan banyak persamaan (m) : ");
 	    	    					int m = userInput.nextInt(); //Memasukkan banyak persamaan 
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
->>>>>>> 6feb5859c990ec75b000985368d3537878944525
+
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -303,18 +298,11 @@ public class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-<<<<<<< HEAD
-									float[][] matriks = operator.keyboardDetBalikan();
-									System.out.println();
-									System.out.println("Mencari nilai Determinan dengan Metode Kofaktor");
-									System.out.printf("Determinan : %f",operator.DeterminanKofaktor(matriks));
-									System.out.println();
-=======
+
 	    	    					MATRIKS M = new MATRIKS();
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardDetBalikan(n);
->>>>>>> 6feb5859c990ec75b000985368d3537878944525
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
