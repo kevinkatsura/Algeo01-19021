@@ -1,651 +1,256 @@
 package tubes;
 
-import java.util.*;
-import java.lang.*;
 import java.io.*;
+import java.util.*;
 
-public class main {
-	
-	
-
-    public static void tukarBaris(float[][] Matriks, int i, int j)
+public class MATRIKS {
+    //atribut matriks
+    protected double[][] Tab = new double [100][100];
+    protected int NBrsEff;
+    protected int NKolEff;
+    
+    public MATRIKS ()
     {
-        //tukar elemen baris i dengan baris j
-        int N = Matriks.length;
-        for (int k=0; k<=N; k++)
+    	this.NBrsEff = 0;
+    	this.NKolEff = 0;
+    }
+    
+    public void KeyboardSPL(int m, int n)
+    {
+    	Scanner userInput = new Scanner(System.in);
+    	
+    	double [][] A= new double[m][n];
+    	double [] B= new double[m];
+        
+        this.NBrsEff = m;
+        this.NKolEff = n+1;
+        
+    	//menerima masukan koefisien a[i][j]
+        System.out.println("Masukkan koefisien A[i][j] : ");
+        for(int i = 0; i<m; i++)
         {
-            float Temp = Matriks[i][k];
-            Matriks[i][k] = Matriks[j][k];
-            Matriks[j][k] = Temp;
+            for(int j = 0; j<n; j++)
+            {
+                System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
+                A[i][j]  = userInput.nextDouble();
+            }
         }
+
+        //menerima masukan koefisien b[i]
+        System.out.println("Masukkan B[i] : ");
+        for(int k = 0; k<m; k++)
+        {
+            System.out.print("B["+ (k+1) +"] = ");
+            B[k]  = userInput.nextDouble();
+        }
+
+        //membentuk matriks augmented dari masukan yang ada
+        for(int i = 0; i<this.NBrsEff; i++)
+        {
+            for(int j = 0; j<this.NKolEff-1; j++)
+            {
+                this.Tab[i][j]  = A[i][j];
+            }
+        }
+
+        for (int k=0;k<this.NBrsEff;k++)
+        {
+            this.Tab[k][n]  = B[k];
+        }
+        userInput.close();
     }
     
-    public static String inputNamaFile() throws Exception
+    public void KeyboardDetBalikan (int n)
     {
-    	 //membaca masukan dari file text berbentuk matriks augmented
-         Scanner userInput = new Scanner(System.in);
-         String namafile = userInput.nextLine();
-    	 return namafile;
+    	Scanner userInput = new Scanner(System.in);
+    	//menerima masukan koefisien a[i][j]
+        
+    	this.NBrsEff = n;
+        this.NKolEff = n;
+        
+    	System.out.println("Masukkan koefisien A[i][j] : ");
+        for(int i = 0; i<this.NBrsEff; i++)
+        {
+            for(int j = 0; j<this.NKolEff; j++)
+            {
+                System.out.print("A["+(i+1)+"]["+(j+1)+"] = ");
+                this.Tab[i][j]  = userInput.nextDouble();
+            }
+        }
+        userInput.close();
+    }
+
+    public void KeyboardInterpolasi (int n)
+    {
+    	Scanner userInput = new Scanner(System.in);
+	
+    	//melakukan inisiasi array
+    	double [][] Titik= new double[n][2];
+    
+    	//menerima masukan koordinat x dan y sebanyak n titik
+    	System.out.println("Masukkan titik : ");
+    	for(int i = 0; i<n; i++)
+    	{
+    		System.out.print("Titik ke-"+(i+1)+" = ");
+    		for(int j = 0; j<=1; j++)
+    		{	
+    			Titik[i][j]  = userInput.nextDouble();
+    		}
+    	}
+    	
+    	this.NBrsEff = n;
+    	this.NKolEff = n+1;
+    	//membuat masukan titik yang ada menjadi persamaan dan mengubahnya menjadi matriks augmented
+    	for (int k=0; k<this.NBrsEff;k++ )
+    	{
+    		int m=0;
+    		for (int l=0; l<this.NKolEff-1;l++)
+    		{
+    			this.Tab [k][l] = pangkat(Titik [k][0], l); 
+    			m = m+1;
+    		}
+    		if (m==n)
+    		{
+    			this.Tab [k][m] = Titik [k][1];
+    		}
+    	}
+    	userInput.close();
     }
     
-   
-    public static float DeterminanKofaktor(float[][] matriks ) {
-        float det = 0;
-        if ((matriks.length == 2) && (matriks[0].length == 2)){
-            det =(matriks[0][0]*matriks[1][1]) - (matriks[0][1]*matriks[1][0]);
-            return det;
-        }
-        else{
-            int i,j,k;
-            float[][] Mtemp = new float[(matriks.length)-1][(matriks[0].length)-1];
-            for (k = 0; k < matriks[0].length; k++){
-                for (i=1; i < matriks.length; i++){
-                    for(j=0; j < matriks[0].length; j++){
-                        if (j>k){
-                            Mtemp[i-1][j-1] = matriks[i][j];
-                        }
-                        else{
-                            if (j==k){continue;}
-                            else {
-                                Mtemp[i - 1][j] = matriks[i][j];
-                            }
-                        }
-                    }
-                }
-                if (k%2 == 0){
-                    det += matriks[0][k]*DeterminanKofaktor(Mtemp);
-                }
-                else{
-                    det -= matriks[0][k]*DeterminanKofaktor(Mtemp);
-                }
-            }
-            return det;
-
-        }
-    }
-    public static float DeterminanReduksiBaris(float[][] matriks) {
-        float representation1,representation2 ;
-
-        for (int i = 1; i < matriks.length; i++) {
-            for (int j = 0; j < i ; j++) {
-                representation1 = matriks[i-1][j] ;
-                representation2 = matriks[i][j] ;
-                for (int k = j; k < matriks[0].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
-                }
-
-            }
-        }
-        float det = 1 ;
-        for (int i = 0; i < matriks.length; i++) {
-            det *= matriks[i][i] ;
-        }
-        return det ;
-    }
-    static float[][] SPLGauss(float[][] matriks) {
-
-        float representation1,representation2 ;
-        for (int i = 1; i < matriks.length; i++) {
-            for (int j = 0; j < i ; j++) {
-                representation1 = matriks[i-1][j] ;
-                representation2 = matriks[i][j] ;
-                for (int k = j; k < matriks[0].length ; k++) {
-                    matriks[i][k] = matriks[i][k]-(matriks[i-1][k]/representation1)*representation2 ;
-                }
-
-            }
-        }
-        for (int l = 0; l < matriks.length; l++) {
-            int indeksFound = -1;
-            int i = 0 ;
-            while(i < matriks[l].length && indeksFound == -1){
-                if (matriks[l][i] != 0){
-                    indeksFound = i ;
-                }
-                i++ ;
-            }
-            float temp = matriks[l][indeksFound] ;
-            for (int m = i; m < matriks[l].length; m++) {
-
-                matriks[l][m] = matriks[l][m]/temp ;
-            }
-
-        }
-        return matriks ;
-    }
-
-    public static float[][] SPLGaussJordan(float[][] matriksinput) {
-        float[][] matriks = SPLGauss(matriksinput) ;
-        for (int i = matriks.length-1; i >= 1 ; i--) {
-            int indeksFound = -1;
-            int l = 0 ;
-            while(l < matriks[i].length && indeksFound == -1){
-                if (matriks[i][l] != 0){
-                    indeksFound = l ;
-                }
-                l++ ;
-            }
-            float rep1 = matriks[i][indeksFound] ;
-            if (l != matriks[i].length) {
-                for (int j = i-1; j >= 0; j--) {
-                    float rep2 = matriks[j][indeksFound] ;
-                    for (int k = 0; k < matriks[j].length; k++) {
-                        matriks[j][k] = matriks[j][k] - (matriks[i][k]/rep1)*rep2 ;
-                    }
-                }
-            }
-        }
-        return matriks ;
-    }
-    public static float [] Cramer(float matriks [][])
+    public void BacaFileMatriks (String namafile)
     {
-        /* I.S : persamaan dengan n peubah n persamaan
-                 input berupa matriks augmented */
-        /* F.S : menghasilkan array yang berisikan nilai peubah */
-
-        // memisahkan matriks augmented menjadi 2 matriks biasa
-        int i,j,k;
-        int m = matriks.length;
-
-        float [][]A = new float [m][m];
-        float []B = new float [m];
-        float []res = new float[m];
-        for (i=0; i<m; i++){
-            for (j=0; j<m; j++){
-                A[i][j] = matriks[i][j];
-            }
-        }
-        for (i=0; i<m; i++){
-            B[i] = matriks[i][matriks[0].length-1];
-        }
-        // mencari determinan matriks
-        float detA = DeterminanKofaktor(A);
-        // mencari determinan peubah (Dx, Dy, dst..)
-        for (k =0; k<m; k++){
-            // mengembalikan  matriks A
-            for (i=0; i<m; i++){
-                for (j=0; j<m; j++){
-                    A[i][j] = matriks[i][j];
-                }
-            }
-            for (i=0; i<m; i++){
-                A[i][k] = B[i];
-            }
-            float Dx = DeterminanKofaktor(A);
-            res[k] = Dx/detA;
-        }
-
-        return res;
+    	try
+    	{
+    		File fileSaya = new File("C:\\Users\\OMEN\\eclipse-workspace\\tubes\\bin\\tubes\\"+namafile);
+    		Scanner bacaBaris = new Scanner (fileSaya);
+    		
+    		if(bacaBaris.hasNextLine())
+    		{
+    			int elemen = 0;
+    			String line = bacaBaris.nextLine();
+    			line = line.trim();
+    			
+    			for (int i=0; i<line.length();i++)
+				{
+					if(line.charAt(i)==' ')
+					{
+						elemen += 1; 
+					}
+				}
+    			elemen +=1;
+    			
+    			bacaBaris = new Scanner (fileSaya);
+    			
+    			int baris = 0, kolom = 0;
+    			
+    			while (bacaBaris.hasNextDouble())
+    			{
+    				this.Tab[baris][kolom] = bacaBaris.nextDouble();
+    				kolom += 1;
+    				if (kolom == elemen)
+    				{
+    					baris +=1;
+    					kolom = 0;
+    				}
+    			}
+    			
+    			this.NBrsEff = baris;
+    			this.NKolEff = elemen;
+    			
+    		}
+    		else
+    		{
+    			System.out.println("File Kosong");
+    		}
+    		bacaBaris.close();
+    	}
+    	catch (FileNotFoundException e)
+    	{
+    		// apabila file tidak ditemukan
+            System.out.println("Terjadi Kesalahan: " + e.getMessage());
+            e.printStackTrace();
+    	}
     }
-    public static float [][] Transpose ( float[][] Matriks)
+    
+    public void BacaFileTitikInterpolasi (String namafile)
     {
-        int i,j;
-        int baris = Matriks.length;
-        int kolom = Matriks[0].length;
-        float [][] Mtrans = new float [kolom][baris];
-        for (i=0; i<kolom; i++){
-            for (j=0; j<baris; j++){
-                Mtrans[i][j] = Matriks[j][i];
-            }
-        }
-        return Mtrans;
+    	MATRIKS M1 = new MATRIKS();
+    	M1.BacaFileMatriks(namafile);
+    	
+    	MATRIKS MAug = new MATRIKS();
+    	
+    	int n = M1.NBrsEff;
+    	MAug.NBrsEff = n;
+    	MAug.NKolEff = n+1;
+    	
+    	//membuat masukan titik yang ada menjadi persamaan dan mengubahnya menjadi matriks augmented
+    	for (int k=0; k<MAug.NBrsEff;k++ )
+    	{
+    		int m=0;
+    		for (int l=0; l<MAug.NKolEff-1;l++)
+    		{
+    			MAug.Tab [k][l] = pangkat(M1.Tab[k][0], l); 
+    			m = m+1;
+    		}
+    		if (m==n)
+    		{
+    			MAug.Tab [k][m] = M1.Tab[k][1];
+    		}
+    	}
+    	
+    	this.NBrsEff = n;
+    	this.NKolEff = n+1;
+    	for (int i = 0; i<this.NBrsEff; i++)
+    	{
+    		for (int j=0; j<this.NKolEff;j++)
+    		{
+    			this.Tab [i][j] = MAug.Tab[i][j]; 
+    		}
+    	}
+    	
     }
-
-    public static float [][] Adjoint ( float [][] Matriks)
+    
+    public double pangkat (double a, int b)
     {
-        // I.S  : Matriks yang di input merupakan matriks bujursangkar
-        // F.S  : Mengembalikan matriks adjoint matriks inputan
+    	//fungsi pangkat (mirip pow tapi untuk tipe float)
+    	
+    	//inisiasi variabel
+    	double hasil = 1;
+    	double temp = 0;
 
-        int i,j,k,l;
-        int len = Matriks.length;
+    	//penanganan jika pangkat 0 akan menghasilkan nilai 1
+    	if (b==0)
+    	{
+    		hasil = 1;
+    	}
 
-        float[][] Mtemp = new float[len-1][len-1];
-        float[][] Adj = new float [len][len];
+    	//penanganan jika pangkat > 0
+    	else
+    	{
+    		for (int i=1; i<=b;i++)
+    		{
+    			temp = hasil * a;
+    			hasil = temp;
+    		}
+    	}
 
-        for (k = 0; k < len; k++){
-            for (l=0; l<len; l++){
-                for (i=0; i<len; i++){
-                    for (j=0; j<len; j++){
-                        if (i==k){continue;}
-                        else{
-                            if (j==l){continue;}
-                            else{
-                                if ((i>k)&&(j>l)){
-                                    Mtemp[i-1][j-1] = Matriks[i][j];
-                                }
-                                else if ((i>k)&&(j<l)){
-                                    Mtemp[i-1][j]= Matriks[i][j];
-                                }
-                                else if ((i<k)&&(j>l)){
-                                    Mtemp[i][j-1] = Matriks[i][j];
-                                }
-                                else {
-                                    Mtemp[i][j] = Matriks[i][j];
-                                }
-                            }
-                        }
-                    }
-                }
-                if ((k+l)%2 ==0){
-                    Adj[k][l] = DeterminanKofaktor(Mtemp);
-                }
-                else{
-                    Adj[k][l] = -DeterminanKofaktor(Mtemp);
-                }
-            }
-        }
-        // Mentranspose kofaktor matriks (Adj)
-        Adj = Transpose(Adj);
-        return Adj;
+    	//mengembalikan hasil pangkat
+    	return hasil;
     }
-    public static float [][] MatriksInvers (float [][] Matriks)
-    {
-        // I.S      : Matriks masukan merupakan matriks persegi
-        // F.S      : mengembalikan matriks invers dari matriks masukan
 
-        int i,j;
-        int len = Matriks.length;
-        float [][] Adj;
-        float [][] MInvers = new float[len][len];
-        float faktor;
-        faktor = 1/DeterminanKofaktor(Matriks);
-        Adj = Adjoint(Matriks);
-
-        for (i=0; i<len; i++){
-            for (j=0; j<len; j++){
-                MInvers[i][j] = faktor*Adj[i][j];
-            }
-        }
-        return MInvers;
-    }
-    public static void TulisMatriks(float [][] Matriks)
+    public void TulisMatriks()
     {
         // Prosedur mencetak matriks
-        int i,j;
-        int baris = Matriks.length;
-        int kolom = Matriks[0].length;
 
-        for (i=0; i<baris; i++){
-            for (j=0; j<kolom; j++){
-                if (j==kolom-1){
-                    System.out.println(Matriks[i][j]);
-                }
-                else {
-                    System.out.print(Matriks[i][j]+" ");
-                }
+        for (int i=0; i<this.NBrsEff; i++)
+        {
+            for (int j=0; j<this.NKolEff; j++)
+            {
+            	System.out.print(this.Tab[i][j]+" ");
             }
+            System.out.println();
         }
-    }
-  
-    public static void Interpolasi (float [][] Matriks)
-    {
-    	
-    	
-    }
-    public static void main(String[] args) {
-	    Scanner userInput = new Scanner(System.in);
-		
-	    //menampilkan menu utama
-	    System.out.println("MENU");
-	    System.out.println("==============================================");
-	    System.out.println("1. Sistem Persamaaan Linier");
-	    System.out.println("2. Determinan");
-	    System.out.println("3. Matriks balikan");
-	    System.out.println("4. Interpolasi Polinom");
-	    System.out.println("5. Regresi linier berganda");
-	    System.out.println("6. Keluar");
+     }
 
-	    boolean check1 = false;
-	    boolean check2 = false;
-	    boolean check3 = false;
-	    int pil_Masukan, pil_Operasi;
-	    
-	    //validasi masukan sampai sesuai dengan pilihan yang ada
-	    while (!check1)
-	    	{
-	    		System.out.print("Masukkan pilihan : ");
-	    		pil_Operasi = userInput.nextInt();
-	    		if (pil_Operasi==1)
-	    		{
-	    			check1=true;
-	    			System.out.println("==============================================");
-	    			System.out.println("1. Metode eliminasi Gauss");
-	    			System.out.println("2. Metode eliminasi Gauss-Jordan");
-	    			System.out.println("3. Metode matriks balikan");
-	    			System.out.println("4. Kaidah Cramer");
-	    			System.out.println("5. Keluar");
-	    			
-	    			while (!check2)
-	    			{
-	    				System.out.print("Masukkan pilihan : ");
-	    				int pil_Metode1 = userInput.nextInt();
-	        
-	    				if (pil_Metode1==1)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					String filename;
-	    	    					check3=true;
-	    	    					MATRIKS M = new MATRIKS();
-	    	    					Scanner in = new Scanner(System.in);
-	    							System.out.print("Masukkan nama file eksternal (.txt): ");
-	    							filename = in.nextLine(); // Memasukkan nama file eksternal data uji
-									M.BacaFileTitikInterpolasi(filename);
-									M.TulisMatriks();
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode1==2)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode1==3)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode1==4)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode1==5)
-	    				{
-	    					break;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println("Pilihan tidak tersedia");
-	    					check2=false;
-	    				}
-	    			}
-	    		}
-	    	
-	    		else if (pil_Operasi==2)
-	    		{
-	    			
-	    			check1=true;
-	    			System.out.println("==============================================");
-	    			System.out.println("1. Metode reduksi baris");
-	    			System.out.println("2. Metode ekspansi kofaktor");
-	    			System.out.println("3. Keluar");
-	    			
-	    			while(!check2)
-	    			{
-	    				System.out.print("Masukkan pilihan : ");
-	    				int pil_Metode2 = userInput.nextInt();
-	        
-	    				if (pil_Metode2 == 1)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode2==2)
-	    				{
-	    					check2=true;
-	    					System.out.println("==============================================");
-	    					System.out.println("1. Menerima masukan keyboard");
-	    	    			System.out.println("2. Menerima masukan dari file");
-	    	    			System.out.println("3. Keluar");
-	    					while(!check3)
-	    					{
-	    						System.out.print("Masukkan pilihan : ");
-	    	    				pil_Masukan = userInput.nextInt();
-	    	    				if(pil_Masukan==1)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==2)
-	    	    				{
-	    	    					check3=true;
-	    	    				}
-	    	    				else if (pil_Masukan==3)
-	    	    				{
-	    	    					break;
-	    	    				}
-	    	    				else 
-	    	    				{
-	    	    					System.out.println("Pilihan tidak tersedia");
-	    	    	    			check3 = false;
-	    	    				}
-	    					}
-	    				}
-	    				else if (pil_Metode2==2)
-	    				{
-	    					break;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println("Pilihan tidak tersedia");
-	    					check2 = false;
-	    				}
-	    			}
-	    		}
-	    		else if (pil_Operasi==3)
-	    		{
-	    			check1=true;
-					System.out.println("==============================================");
-					System.out.println("1. Menerima masukan keyboard");
-	    			System.out.println("2. Menerima masukan dari file");
-	    			System.out.println("3. Keluar");
-					while(!check3)
-					{
-						System.out.print("Masukkan pilihan : ");
-	    				pil_Masukan = userInput.nextInt();
-	    				if(pil_Masukan==1)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==2)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==3)
-	    				{
-	    					break;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println("Pilihan tidak tersedia");
-	    	    			check3 = false;
-	    				}
-					}
-	    		}
-	    		else if (pil_Operasi==4)
-	    		{
-	    			check1=true;
-					System.out.println("==============================================");
-					System.out.println("1. Menerima masukan keyboard");
-	    			System.out.println("2. Menerima masukan dari file");
-	    			System.out.println("3. Keluar");
-					while(!check3)
-					{
-						System.out.print("Masukkan pilihan : ");
-	    				pil_Masukan = userInput.nextInt();
-	    				if(pil_Masukan==1)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==2)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==3)
-	    				{
-	    					break;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println("Pilihan tidak tersedia");
-	    	    			check3 = false;
-	    				}
-					}
-	    		}
-	    		else if (pil_Operasi==5)
-	    		{
-	    			check1=true;
-					System.out.println("==============================================");
-					System.out.println("1. Menerima masukan keyboard");
-	    			System.out.println("2. Menerima masukan dari file");
-	    			System.out.println("3. Keluar");
-					while(!check3)
-					{
-						System.out.print("Masukkan pilihan : ");
-	    				pil_Masukan = userInput.nextInt();
-	    				if(pil_Masukan==1)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==2)
-	    				{
-	    					check3=true;
-	    				}
-	    				else if (pil_Masukan==3)
-	    				{
-	    					break;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println("Pilihan tidak tersedia");
-	    	    			check3 = false;
-	    				}
-					}
-	    		}
-	    		else if (pil_Operasi==6)
-	    		{
-	    			break;
-	    		}
-	    		else 
-	    		{
-	    			System.out.println("Pilihan tidak tersedia");
-	    			check1 = false;
-	    		}
-	  
-	    	}
-	    userInput.close();    
-  }
- 
+   
 }
