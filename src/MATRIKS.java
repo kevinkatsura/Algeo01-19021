@@ -117,6 +117,10 @@ public class MATRIKS {
     	userInput.close();
     }
     
+    public void KeyboardRegresi (int n)
+    {
+    	
+    }
     public void BacaFileMatriks (String namafile)
     {
     	try
@@ -210,6 +214,10 @@ public class MATRIKS {
     	
     }
     
+    public void BacaFileRegresi (String namafile)
+    {
+    	
+    }
     public float pangkat (float a, int b)
     {
     	//fungsi pangkat (mirip pow tapi untuk tipe float)

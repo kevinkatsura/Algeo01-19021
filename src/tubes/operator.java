@@ -1,11 +1,7 @@
-package main;
+package tubes;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
-import java.util.Arrays;
-import java.util.Scanner;
-import tubes.MATRIKS;
+import java.util.*;
+
 
 public class operator {
 
@@ -73,8 +69,7 @@ public class operator {
         }
         return det ;
     }
-
-    
+  
     public tubes.MATRIKS SPLGauss(tubes.MATRIKS M) {
         for (int i = 0; i < M.NBrsEff; i++) {
             boolean swapped = false ;
@@ -158,7 +153,6 @@ public class operator {
         }
         return k;
     }
-
 
     public tubes.MATRIKS KaliMatriks(tubes.MATRIKS matriks1, tubes.MATRIKS matriks2) {
         tubes.MATRIKS matriks = new tubes.MATRIKS();
@@ -369,7 +363,7 @@ public class operator {
         }
     }
 
-    public  void MenulisSolusiSPLGaussJordan(MATRIKS matriks) {
+    public void MenulisSolusiSPLGaussJordan(MATRIKS matriks) {
         if (matriks.NBrsEff == matriks.NKolEff-1){
             for (int i = 0 ; i < matriks.NBrsEff ; i++) {
                 if (matriks.Tab[i][i] != 0){
@@ -504,6 +498,7 @@ public class operator {
         }
         return Adj;
     }
+    
     public MATRIKS MatriksInvers (MATRIKS Matriks)
     {
         // I.S      : Matriks masukan merupakan matriks persegi
@@ -533,6 +528,7 @@ public class operator {
             return MInvers;
         }
     }
+    
     public static void TulisMatriks(MATRIKS Matriks)
     {
         // Prosedur mencetak matriks

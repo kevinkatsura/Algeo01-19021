@@ -1,12 +1,8 @@
-package tubes ;
+package tubes;
 
 import java.util.*;
-import java.io.*;
-import java.lang.*;
-import tubes.operator;
-import tubes.MATRIKS;
 
-public static class main {
+public class main {
   public static void main(String[] args) {
 	    Scanner userInput = new Scanner(System.in);
 		
@@ -154,7 +150,6 @@ public static class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
-
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -197,7 +192,6 @@ public static class main {
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    	    					M.KeyboardSPL(m, n);
-	    	    					operator.Cramer(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
@@ -298,7 +292,6 @@ public static class main {
 	    	    				if(pil_Masukan==1)
 	    	    				{
 	    	    					check3=true;
-
 	    	    					MATRIKS M = new MATRIKS();
 	    	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
