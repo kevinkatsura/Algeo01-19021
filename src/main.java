@@ -122,10 +122,10 @@ public class main {
 	    	    					
 	    	    					operator OP = new operator();
 	    	    					System.out.println("==============================================");
-	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss-Jordan:");
 	    	    					OP.SPLGaussJordan(M);
 	    	    					OP.TulisMatriks(M);
-	    	    					OP.MenulisSolusiSPLGaussJordan(M);
+	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
 	    	    				{
