@@ -410,7 +410,7 @@ public class main {
 	    					operator OP = new operator();
 	    					System.out.println("==============================================");
 	    					System.out.println("Matriks balikan dari matriks di atas adalah ");
-	    					M1 = OP.Adjoint(M);
+	    					M1 = OP.MatriksInvers(M);
 	    					OP.TulisMatriks(M1);
 	    				}
 	    				else if (pil_Masukan==2)
