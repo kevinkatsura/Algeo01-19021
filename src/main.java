@@ -1,7 +1,6 @@
 package src;
 
 import java.util.*;
-import tubes.operator;
 
 public class main {
   public static void main(String[] args) {
@@ -122,7 +121,7 @@ public class main {
 	    	    					
 	    	    					operator OP = new operator();
 	    	    					System.out.println("==============================================");
-	    	    					System.out.println("Matriks setelah dilakukan Gauss-Jordan:");
+	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGaussJordan(M);
 	    	    					OP.TulisMatriks(M);
 	    	    					OP.MenulisSolusiSPL(M);
@@ -141,7 +140,7 @@ public class main {
 	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGaussJordan(M);
 	    	    					OP.TulisMatriks(M);
-	    	    					OP.MenulisSolusiSPLGaussJordan(M);
+	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
 	    	    				{

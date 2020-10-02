@@ -363,58 +363,56 @@ public class operator {
         }
     }
 
-    public void MenulisSolusiSPLGaussJordan(MATRIKS matriks) {
-
-        public void Cramer (MATRIKS matriks)
-        {
+    public void Cramer(MATRIKS matriks)
+    {
         /* I.S : persamaan dengan n peubah n persamaan
                  input berupa matriks augmented */
-            /* F.S : menghasilkan array yang berisikan nilai peubah */
+        /* F.S : menghasilkan array yang berisikan nilai peubah */
 
-            // memisahkan matriks augmented menjadi 2 matriks biasa
-            int i, j, k;
-            int m = matriks.NBrsEff;
+        // memisahkan matriks augmented menjadi 2 matriks biasa
+        int i,j,k;
+        int m = matriks.NBrsEff;
 
-            MATRIKS A = new MATRIKS();
-            A.NBrsEff = m;
-            A.NKolEff = m;
-            float[] B = new float[m];
-            float[] res = new float[m];
-            for (i = 0; i < m; i++) {
-                for (j = 0; j < m; j++) {
-                    A.Tab[i][j] = matriks.Tab[i][j];
-                }
+        MATRIKS A = new MATRIKS();
+        A.NBrsEff = m;
+        A.NKolEff = m;
+        float []B = new float [m];
+        float []res = new float[m];
+        for (i=0; i<m; i++){
+            for (j=0; j<m; j++){
+                A.Tab[i][j] = matriks.Tab[i][j];
             }
-            for (i = 0; i < m; i++) {
-                B[i] = matriks.Tab[i][matriks.NKolEff - 1];
+        }
+        for (i=0; i<m; i++){
+            B[i] = matriks.Tab[i][matriks.NKolEff-1];
+        }
+        // mencari determinan matriks
+        float detA = DeterminanKofaktor(A);
+        // mengecek jika matriks tidak memiliki determinan
+        if (detA == 0){
+            System.out.println("Matriks tidak memiliki determinan (determinan = 0)");
+        }
+        else{
+            // mencari determinan peubah (Dx, Dy, dst..)
+            for (k =0; k<m; k++){
+                // mengembalikan  matriks A
+                for (i=0; i<m; i++){
+                    for (j=0; j<m; j++){
+                        A.Tab[i][j] = matriks.Tab[i][j];
+                    }
+                }
+                for (i=0; i<m; i++){
+                    A.Tab[i][k] = B[i];
+                }
+                float Dx = DeterminanKofaktor(A);
+                res[k] = Dx/detA;
             }
-            // mencari determinan matriks
-            float detA = DeterminanKofaktor(A);
-            // mengecek jika matriks tidak memiliki determinan
-            if (detA == 0) {
-                System.out.println("Matriks tidak memiliki determinan (determinan = 0)");
-            } else {
-                // mencari determinan peubah (Dx, Dy, dst..)
-                for (k = 0; k < m; k++) {
-                    // mengembalikan  matriks A
-                    for (i = 0; i < m; i++) {
-                        for (j = 0; j < m; j++) {
-                            A.Tab[i][j] = matriks.Tab[i][j];
-                        }
-                    }
-                    for (i = 0; i < m; i++) {
-                        A.Tab[i][k] = B[i];
-                    }
-                    float Dx = DeterminanKofaktor(A);
-                    res[k] = Dx / detA;
-                }
-                for (i = 0; i < m; i++) {
-                    System.out.println("X" + (i + 1) + "= " + res[i]);
-                }
-
+            for( i=0; i<m; i++){
+                System.out.println("X"+(i+1)+"= "+res[i]);
             }
 
         }
+
     }
 
     public MATRIKS Transpose ( MATRIKS Matriks)
@@ -579,4 +577,31 @@ public class operator {
         }
     }
     
+    public float pangkat (float a, int b)
+    {
+    	//fungsi pangkat (mirip pow tapi untuk tipe float)
+    	
+    	//inisiasi variabel
+    	float hasil = 1;
+    	float temp = 0;
+
+    	//penanganan jika pangkat 0 akan menghasilkan nilai 1
+    	if (b==0)
+    	{
+    		hasil = 1;
+    	}
+
+    	//penanganan jika pangkat > 0
+    	else
+    	{
+    		for (int i=1; i<=b;i++)
+    		{
+    			temp = hasil * a;
+    			hasil = temp;
+    		}
+    	}
+
+    	//mengembalikan hasil pangkat
+    	return hasil;
+    }
 }
