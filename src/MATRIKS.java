@@ -121,11 +121,12 @@ public class MATRIKS {
     {
     	
     }
+    
     public void BacaFileMatriks (String namafile)
     {
     	try
     	{
-    		File fileSaya = new File(namafile);
+    		File fileSaya = new File("C:\\Users\\OMEN\\eclipse-workspace\\tubes\\src\\tubes\\"+namafile);
     		Scanner bacaBaris = new Scanner (fileSaya);
     		
     		if(bacaBaris.hasNextLine())
@@ -218,6 +219,7 @@ public class MATRIKS {
     {
     	
     }
+    
     public float pangkat (float a, int b)
     {
     	//fungsi pangkat (mirip pow tapi untuk tipe float)
@@ -246,19 +248,4 @@ public class MATRIKS {
     	return hasil;
     }
 
-    public void TulisMatriks()
-    {
-        // Prosedur mencetak matriks
-
-        for (int i=0; i<this.NBrsEff; i++)
-        {
-            for (int j=0; j<this.NKolEff; j++)
-            {
-            	System.out.print(this.Tab[i][j]+" ");
-            }
-            System.out.println();
-        }
-     }
-
-   
 }

@@ -364,14 +364,6 @@ public class operator {
     }
 
     public void MenulisSolusiSPLGaussJordan(MATRIKS matriks) {
-        if (matriks.NBrsEff == matriks.NKolEff-1){
-            for (int i = 0 ; i < matriks.NBrsEff ; i++) {
-                if (matriks.Tab[i][i] != 0){
-                    System.out.printf("X-%d = %.2f\n",i+1,matriks.Tab[i][matriks.NKolEff-1]);
-                }
-            }
-        }
-    }
 
     public void Cramer(MATRIKS matriks)
     {
@@ -458,8 +450,8 @@ public class operator {
 
         if (len==2){
             Adj.Tab[0][0] = Matriks.Tab[1][1];
-            Adj.Tab[0][1] = -Matriks.Tab[1][0];
-            Adj.Tab[1][0] = -Matriks.Tab[0][1];
+            Adj.Tab[0][1] = -Matriks.Tab[0][1];
+            Adj.Tab[1][0] = -Matriks.Tab[1][0];
             Adj.Tab[1][1] = Matriks.Tab[0][0];
         }
         else {
@@ -529,11 +521,63 @@ public class operator {
         }
     }
     
-    public static void TulisMatriks(MATRIKS Matriks)
+    public void TulisMatriks(MATRIKS M)
     {
         // Prosedur mencetak matriks
-        for (int i = 0; i < Matriks.NBrsEff; i++) {
-            System.out.println(Arrays.toString(Matriks.Tab[i]));
+
+        for (int i=0; i<M.NBrsEff; i++)
+        {
+            for (int j=0; j<M.NKolEff; j++)
+            {
+            	System.out.print(M.Tab[i][j]+" ");
+            }
+            System.out.println();
+        }
+     }
+
+    public void MenulisSolusiInterpolasi(MATRIKS matriks, float x) {
+        MATRIKS NewMatrix = new MATRIKS() ;
+        NewMatrix.NKolEff = matriks.NKolEff ;
+        NewMatrix.NBrsEff = matriks.NBrsEff;
+        NewMatrix = RemoveZeroRow(matriks);
+        float sum = 0;
+        if (NewMatrix.NBrsEff == NewMatrix.NKolEff-1){
+            if(IsNoSolution(NewMatrix)){
+                System.out.println();
+                System.out.println("Matriks Tidak Memiliki Solusi");
+            }
+            else{
+                if (IsAllDiagonalOne(NewMatrix)){
+                    System.out.println();
+                    System.out.println("Matriks Memiliki Solusi Unik");
+                    System.out.println("Solusi Matriks Antara Lain : ");
+                    float [] Solusi = SubsitusiMundur(NewMatrix) ;
+                    for (int i = 0; i < NewMatrix.NBrsEff; i++) {
+                        System.out.printf("X%d = %.2f\n", (i + 1), Solusi[i]);
+                        sum = sum + (Solusi[i]*(pangkat(x,i)));
+                    }
+                    System.out.printf("Nilai taksiran fungsi pada x = %.2f adalah %.4f : \n",x,sum);
+                }
+                else{
+                    System.out.println();
+                    TulisSolusiBanyakSPL(NewMatrix);
+                }
+                System.out.println();
+            }
+        }
+        else{
+            if(IsNoSolution(NewMatrix)){
+                System.out.println();
+                System.out.println("Matriks Tidak Memiliki Solusi");
+                System.out.println();
+            }
+            else{
+                System.out.println();
+                TulisSolusiBanyakSPL(NewMatrix);
+                System.out.println();
+            }
         }
     }
+    
+    public float pangkat (float a, int b)
 }

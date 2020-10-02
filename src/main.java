@@ -69,7 +69,7 @@ public class main {
 	    	    					System.out.println("==============================================");
 	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGauss(M);
-	    	    					M.TulisMatriks();
+	    	    					OP.TulisMatriks(M);
 	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
@@ -85,7 +85,7 @@ public class main {
 	    	    					System.out.println("==============================================");
 	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGauss(M);
-	    	    					M.TulisMatriks();
+	    	    					OP.TulisMatriks(M);
 	    	    					OP.MenulisSolusiSPL(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -124,7 +124,7 @@ public class main {
 	    	    					System.out.println("==============================================");
 	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGaussJordan(M);
-	    	    					M.TulisMatriks();
+	    	    					OP.TulisMatriks(M);
 	    	    					OP.MenulisSolusiSPLGaussJordan(M);
 	    	    				}
 	    	    				else if (pil_Masukan==2)
@@ -140,7 +140,7 @@ public class main {
 	    	    					System.out.println("==============================================");
 	    	    					System.out.println("Matriks setelah dilakukan Gauss:");
 	    	    					OP.SPLGaussJordan(M);
-	    	    					M.TulisMatriks();
+	    	    					OP.TulisMatriks(M);
 	    	    					OP.MenulisSolusiSPLGaussJordan(M);
 	    	    				}
 	    	    				else if (pil_Masukan==3)
@@ -403,6 +403,7 @@ public class main {
 	    				{
 	    					check3=true;
 	    					MATRIKS M = new MATRIKS();
+	    					MATRIKS M1 = new MATRIKS();
 	    					System.out.print("Masukkan banyak peubah (n) : ");
 	    					int n = userInput.nextInt(); //Memasukkan banyak peubah
 	    					M.KeyboardDetBalikan(n);
@@ -410,13 +411,15 @@ public class main {
 	    					operator OP = new operator();
 	    					System.out.println("==============================================");
 	    					System.out.println("Matriks balikan dari matriks di atas adalah ");
-	    					System.out.print(OP.MatriksInvers(M));
+	    					M1 = OP.Adjoint(M);
+	    					OP.TulisMatriks(M1);
 	    				}
 	    				else if (pil_Masukan==2)
 	    				{
 	    					check3=true;
 	    					Scanner file = new Scanner(System.in);
 	    					MATRIKS M = new MATRIKS();
+	    					MATRIKS M1 = new MATRIKS();
 							System.out.print("Masukkan nama file eksternal (.txt): ");
 							namaFile = file.nextLine(); // Memasukkan nama file eksternal data uji
 							M.BacaFileMatriks(namaFile);
@@ -424,7 +427,8 @@ public class main {
 							operator OP = new operator();
 	    					System.out.println("==============================================");
 	    					System.out.println("Matriks balikan dari matriks di atas adalah ");
-	    					System.out.print(OP.MatriksInvers(M));
+	    					M1 = OP.MatriksInvers(M);
+	    					OP.TulisMatriks(M1);
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{
@@ -453,11 +457,16 @@ public class main {
 	    				{
 	    					check3=true;
 	    					MATRIKS M = new MATRIKS();
+	    					Scanner taksir = new Scanner(System.in);
 	    					System.out.print("Masukkan banyak titik (n) : ");
 	    					int n = userInput.nextInt(); //Memasukkan banyak titik
 	    					M.KeyboardInterpolasi(n);
 	    					System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
+	    					x = taksir.nextFloat(); //Memasukkan nilai yang ingin ditaksir 
 	    					
+	    					operator OP = new operator();
+	    					System.out.println("==============================================");
+	    					OP.MenulisSolusiInterpolasi(M,x);
 	    				}
 	    				else if (pil_Masukan==2)
 	    				{
@@ -470,6 +479,10 @@ public class main {
 							M.BacaFileTitikInterpolasi(namaFile);
 							System.out.print("Masukkan nilai yang akan ditaksir (x) : ");
 	    					x = taksir.nextFloat(); //Memasukkan nilai yang ingin ditaksir 
+	    					
+	    					operator OP = new operator();
+	    					System.out.println("==============================================");
+	    					OP.MenulisSolusiInterpolasi(M,x);
 	    				}
 	    				else if (pil_Masukan==3)
 	    				{
