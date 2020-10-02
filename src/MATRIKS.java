@@ -126,7 +126,7 @@ public class MATRIKS {
     {
     	try
     	{
-    		File fileSaya = new File("C:\\Users\\OMEN\\eclipse-workspace\\tubes\\src\\tubes\\"+namafile);
+    		File fileSaya = new File(namafile);
     		Scanner bacaBaris = new Scanner (fileSaya);
     		
     		if(bacaBaris.hasNextLine())
