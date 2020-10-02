@@ -7,4 +7,4 @@ file java ada di src
 
 file dummy ada di test
 
-laporan ada di 
+laporan ada di direktori doc
